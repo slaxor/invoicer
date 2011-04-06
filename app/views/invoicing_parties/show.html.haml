@@ -1,0 +1,35 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), invoicing_parties_path
+  = link_to t('edit'), edit_invoicing_party_path(@invoicing_party)
+
+%dl
+  %dt name
+  %dd= @invoicing_party.name
+  %dt co_line
+  %dd= @invoicing_party.co_line
+  %dt street
+  %dd= @invoicing_party.street
+  %dt post_code
+  %dd= @invoicing_party.post_code
+  %dt city
+  %dd= @invoicing_party.city
+  %dt country
+  %dd= @invoicing_party.country
+  %dt vatid
+  %dd= @invoicing_party.vatid
+  %dt taxnumber
+  %dd= @invoicing_party.taxnumber
+  %dt currency
+  %dd= @invoicing_party.currency
+  %dt bank name
+  %dd= @invoicing_party.bank_name
+  %dt bank_account_number
+  %dd= @invoicing_party.bank_account_number
+  %dt bank_sort_code
+  %dd= @invoicing_party.bank_sort_code
+  %dt telephone
+  %dd= @invoicing_party.telephone
+  %dt email
+  %dd= @invoicing_party.email
+

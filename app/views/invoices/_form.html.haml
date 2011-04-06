@@ -1,0 +1,38 @@
+-#= form_for(:invoice, :url => '/users/4d9325b38621e7346d000004/invoices') do |f|
+= form_for(:user, @invoice) do |f|
+  - if @invoice.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@invoice.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @invoice.errors.full_messages.each do |msg|
+        %li= msg
+
+  .field
+    = f.label :customer
+    = f.select @current_user.customers
+  .field
+    = f.label :number
+    = f.text_field :number
+  .field
+    = f.label :currency
+    = f.text_field :currency
+  .field
+    = f.label :covering_text
+    = f.text_field :covering_text
+  .field
+    = f.label :invoicing_party_id
+    = f.text_field :invoicing_party_id
+  .field
+    = f.label :paid
+    = f.check_box :paid
+  .field
+    = f.label :due_on
+    = f.text_field :due_on
+  .field
+    = f.label :printed_at
+    = f.text_field :printed_at
+
+    = render :partial => 'invoice_item_form', :locals => {:f => f}
+
+  .actions
+    = f.submit

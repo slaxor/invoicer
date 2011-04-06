@@ -1,0 +1,35 @@
+= form_for(@invoice_item) do |f|
+  - if @invoice_item.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@invoice_item.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @invoice_item.errors.full_messages.each do |msg|
+        %li= msg
+
+  .field
+    = f.label :invoice_id
+    = f.text_field :invoice_id
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :pricing_strategy
+    = f.text_field :pricing_strategy
+  .field
+    = f.label :vat_rate
+    = f.text_field :vat_rate
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :started_at
+    = f.datetime_select :started_at
+  .field
+    = f.label :ended_at
+    = f.datetime_select :ended_at
+  .field
+    = f.label :pauses
+    = f.text_field :pauses
+
+  .actions
+    = f.submit

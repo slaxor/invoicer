@@ -1,0 +1,24 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), customers_path
+  = link_to t('edit'), edit_customer_path(@customer)
+
+%dl
+  %dt name
+  %dd= @customer.name
+  %dt number
+  %dd= @customer.number
+  %dt user_id
+  %dd= @customer.user_id
+  %dt email
+  %dd= @customer.email
+  %dt telephone
+  %dd= @customer.telephone
+  %dt street
+  %dd= @customer.street
+  %dt post_code
+  %dd= @customer.post_code
+  %dt city
+  %dd= @customer.city
+  %dt country
+  %dd= @customer.country

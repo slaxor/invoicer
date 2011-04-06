@@ -1,0 +1,35 @@
+= form_for(:customer, :url => user_customers_path(@current_user)) do |f|
+  - if @customer.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@customer.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @customer.errors.full_messages.each do |msg|
+        %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :number
+    = f.text_field :number
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :telephone
+    = f.text_field :telephone
+  .field
+    = f.label :street
+    = f.text_field :street
+  .field
+    = f.label :post_code
+    = f.text_field :post_code
+  .field
+    = f.label :city
+    = f.text_field :city
+  .field
+    = f.label :country
+    = f.text_field :country
+
+  .actions
+    = f.submit

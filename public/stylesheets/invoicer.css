@@ -1,0 +1,103 @@
+table tr {
+  border: 1px solid #404040; }
+  table tr th {
+    border: 1px solid #404040;
+    padding: 2px 14px;
+    font-weight: bold; }
+  table tr td {
+    padding: 2px 14px;
+    border: 1px dotted #404040; }
+
+fieldset {
+  border: 0; }
+
+strong {
+  font-style: italic;
+  font-variant: small-caps;
+  font-weight: lighter; }
+
+label {
+  color: rgba(60, 60, 60, 0.7);
+  display: block; }
+
+.window {
+  border: 1px solid #a0a0a0;
+  display: inline-table;
+  padding: 0 15px;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.9); }
+
+#flashmsg {
+  position: fixed;
+  left: 30%;
+  width: 40%;
+  top: 4em;
+  z-index: 10000;
+  border: 0px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  text-align: center;
+  padding: 4px; }
+
+.info {
+  background-color: rgba(0, 255, 0, 0.3); }
+
+.warn {
+  background-color: rgba(255, 255, 0, 0.3); }
+
+.error {
+  background-color: rgba(255, 0, 0, 0.3); }
+
+.fatal {
+  background-color: rgba(255, 0, 0, 0.9); }
+
+.details-list {
+  display: none; }
+
+.details-list.show {
+  display: block; }
+
+.details-list li {
+  list-style: none; }
+
+.new, .edit, .delete, .details, .invoices, .ok, .cancel {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border: 0;
+  float: right;
+  margin-left: 6px; }
+
+.details {
+  background: url("/images/silk.png") repeat scroll -5px -734px transparent; }
+
+.invoices {
+  background: url("/images/silk.png") repeat scroll -1407px -871px transparent; }
+
+.new {
+  background: url("/images/silk.png") repeat scroll -6px -21px transparent;
+  top: -4em; }
+
+.edit {
+  background: url("/images/silk.png") repeat scroll -1126px -871px transparent; }
+
+.delete {
+  background: url("/images/silk.png") repeat scroll -566px -242px transparent; }
+
+.ok {
+  background: url("/images/silk.png") repeat scroll -6px -4px transparent; }
+
+.cancel {
+  background: url("/images/silk.png") repeat scroll -286px -293px transparent; }
+
+.unpaid {
+  background-color: #ffffa0; }
+
+.paid {
+  background-color: #d0ffd0; }
+
+.paid {
+  background-color: #ffd0d0; }

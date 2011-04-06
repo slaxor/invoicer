@@ -1,0 +1,14 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), users_path
+  = link_to t('edit'), edit_user_path(@user)
+  = link_to t('customers'), user_customers_path(@user)
+  = link_to t('invoicing_parties'), user_invoicing_parties_path(@user)
+
+%dl
+  %dt  login
+  %dd= @user.login
+  %dt  email
+  %dd= @user.email
+
+.date_and_time

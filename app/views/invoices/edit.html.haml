@@ -1,0 +1,5 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), invoices_path
+  = link_to t('show'), @invoice
+= render 'form'

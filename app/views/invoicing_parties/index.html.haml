@@ -1,0 +1,45 @@
+%h1 Invoicing parties
+%p= link_to 'new', new_user_invoicing_party_path(@current_user)
+
+%table
+  %thead
+    %tr
+      %th name
+      %th user
+      %th co_line
+      %th street
+      %th post_code
+      %th city
+      %th country
+      %th vatid
+      %th taxnumber
+      %th bank name
+      %th bank_account_number
+      %th bank_sort_code
+      %th telephone
+      %th email
+      %th invoices
+      %th actions
+
+  %tbody
+    - for invoicing_party in @invoicing_parties
+      %tr{ :class => cycle(:odd, :even) }
+        %td= invoicing_party.name
+        %td= invoicing_party.user.login
+        %td= invoicing_party.co_line
+        %td= invoicing_party.street
+        %td= invoicing_party.post_code
+        %td= invoicing_party.city
+        %td= invoicing_party.country
+        %td= invoicing_party.vatid
+        %td= invoicing_party.taxnumber
+        %td= invoicing_party.bank_name
+        %td= invoicing_party.bank_account_number
+        %td= invoicing_party.bank_sort_code
+        %td= invoicing_party.telephone
+        %td= invoicing_party.email
+        %td= invoicing_party.invoices
+        %td.action
+          %button[invoicing_party, 'show'] show
+          %button[invoicing_party, 'edit'] edit
+          %button[invoicing_party, 'destroy'] destroy

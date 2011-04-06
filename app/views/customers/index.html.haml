@@ -1,0 +1,37 @@
+%h1 Customers
+%p= link_to t('.new_customer'), new_user_customer_path(@user)
+
+%table
+  %thead
+    %tr
+      %th name
+      %th number
+      %th email
+      %th telephone
+      %th street
+      %th post_code
+      %th city
+      %th country
+      %th invoices
+      %th actions
+
+  %tbody
+    - for customer in @customers
+      %tr{ :class => cycle(:odd, :even) }
+        %td= customer.name
+        %td= customer.number
+        %td= customer.email
+        %td= customer.telephone
+        %td= customer.street
+        %td= customer.post_code
+        %td= customer.city
+        %td= customer.country
+        %td
+          %ul
+            - customer.invoices.each do |invoice|
+              %li.invoice= link_to invoice.number, user_invoice_path(@current_user, invoice)
+            %li.invoice.new= link_to 'new invoice', new_user_invoice_path(@current_user)
+        %td.action
+          %button[customer, 'show'] show
+          %button[customer, 'edit'] edit
+          %button[customer, 'destroy'] destroy

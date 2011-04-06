@@ -1,0 +1,5 @@
+%h1 Invoicing parties
+%p
+  = link_to t('back'), user_invoicing_parties_path(@current_user)
+  = link_to t('show'), @invoicing_party
+= render 'form'

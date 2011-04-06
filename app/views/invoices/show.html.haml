@@ -1,0 +1,22 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), invoices_path
+  = link_to t('edit'), edit_invoice_path(@invoice)
+
+%dl
+  %dt customer_id
+  %dd= @invoice.customer_id
+  %dt number
+  %dd= @invoice.number
+  %dt currency
+  %dd= @invoice.currency
+  %dt covering_text
+  %dd= @invoice.covering_text
+  %dt invoicing_party_id
+  %dd= @invoice.invoicing_party_id
+  %dt paid
+  %dd= @invoice.paid
+  %dt due_on
+  %dd= @invoice.due_on
+  %dt printed_at
+  %dd= @invoice.printed_at
