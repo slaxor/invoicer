@@ -1,10 +1,10 @@
-pdf.page.size = 'A4'
+#pdf.page.size = 'A4'
 #pdf.font "#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf"
 #pdf.font "/usr/share/fonts/truetype/msttcorefonts/georgia.ttf"
 #pdf.font "Times-Roman"
 pdf.font "Helvetica"
 sender_address = [@invoice.invoicing_party.name, @invoice.invoicing_party.street, "#{@invoice.invoicing_party.post_code} #{@invoice.invoicing_party.city}"]
-print_date = @invoice.printed_at.to_s(:german_date)
+print_date = @invoice.printed_at.to_s # (:german_date)
 
 pdf.bounding_box [pdf.margin_box.left, pdf.margin_box.top - 100], :width => 200 do
   pdf.text(format("%s | %s | %s %s",
@@ -41,7 +41,7 @@ pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 30], :width => pdf.margin_bo
   ], :align => { 0 => :left, 1 => :right})
 end
 pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 30], :width => pdf.margin_box.width do
-  pdf.text ("Zahlbar bis spätestens #{@invoice.due_on.to_time.to_s(:german_date)} (eingehend)")
+  pdf.text ("Zahlbar bis spätestens #{@invoice.due_on.to_time.to_s} (eingehend)")
 end
 # footer first page
 pdf.bounding_box [pdf.margin_box.left, pdf.margin_box.bottom + 40 ], :width => pdf.margin_box.width do

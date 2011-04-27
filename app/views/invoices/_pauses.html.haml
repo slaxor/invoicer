@@ -1,0 +1,16 @@
+%table
+  %thead
+    %tr
+      %th description
+      %th started_at
+      %th ended_at
+      -#%th duration
+
+  %tbody
+    - pauses.each do |pause|
+      %tr{ :class => cycle(:odd, :even) }
+        %td= pause['description']
+        %td= pause['started_at']
+        %td= pause['ended_at']
+        -#%td= pause['duration']
+

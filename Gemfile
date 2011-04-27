@@ -1,18 +1,20 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
-gem "mongoid"
-gem "bson_ext"
+gem 'rails'
+gem 'mongoid'
+gem 'bson_ext'
+gem 'devise' # users and auth
 gem 'carrierwave' # file handling
 gem 'unicorn'
 gem 'capistrano'
 gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'haml'
+gem 'sass'
 gem 'rails3-generators'
 gem 'prawn'
 gem 'json'
 
-group :test do
+group :test, :development do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl'

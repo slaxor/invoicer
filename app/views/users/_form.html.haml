@@ -1,15 +1,12 @@
-= form_for(@user) do |f|
-  - if @user.errors.any?
+= form_for(current_user) do |f|
+  - if current_user.errors.any?
     #errorExplanation
-      %h2= "#{pluralize(@user.errors.count, 'error')} prohibited this user from being saved:"
+      %h2= "#{pluralize(current_user.errors.count, 'error')} prohibited this user from being saved:"
       %ul
-      - @user.errors.full_messages.each do |msg|
+      - current_user.errors.full_messages.each do |msg|
         %li= msg
-
-  %img{:src => "data:image/jpeg;base64,#{Base64.encode64(@user.avatar.read)}"}
-  .field
-    = f.label :login
-    = f.text_field :login
+  - unless current_user.avatar.blank?
+    %img{:src => "data:image/jpeg;base64,#{Base64.encode64(current_user.avatar.read)}"}
   .field
     = f.label :email
     = f.text_field :email

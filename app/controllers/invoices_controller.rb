@@ -9,9 +9,11 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    debugger
+    @invoice = Invoice.find(params[:id], {
+      :customer_id.in => current_user.customers.map{|c| c.id},
+      :invoicing_party_id => current_user.invoicing_parties.map {|ip| ip.id}
+    })
     respond_to do |format|
-      @invoice = @current_user.invoices.find(params[:id])
       filename = "invoice_#{@invoice.customer.name}_#{@invoice.number}".gsub(/[^A-Za-z0-9]/, '_')
       format.json { render :json => @invoice }
       format.html
@@ -24,11 +26,6 @@ class InvoicesController < ApplicationController
       end
     end
     @invoice = Invoice.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json  { render :json => @invoice }
-    end
   end
 
   def new

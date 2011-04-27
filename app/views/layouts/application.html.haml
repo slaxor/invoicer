@@ -2,7 +2,7 @@
 %html
   %head
     %link{ :rel => 'shortcut icon', :type => "image/x-icon", :href => '/images/favicon.png' }
-    %title InvoicerRails
+    %title= "#{params[:controller].classify}##{params[:action]}"
     = stylesheet_link_tag 'invoicer.css', 'jquery-ui-1.8.5.custom.css', :cache => true
     = javascript_include_tag 'jquery-1.4.2.min.js', 'jquery-ui-1.8.5.custom.min.js', 'jquery-extensions.js',
       'underscore-min.js', 'invoicer', :cache => true
@@ -12,10 +12,11 @@
       %ul#flash_message
         - flash.each do |key, value|
           %li{:class => key}= value
-    - if @current_user
-      %button#destroy_session= "logout #{@current_user.login}"
-      %button#user_settings= "change #{@current_user.login}'s settings"
-      = link_to 'customers', user_customers_path(@current_user)
-      = link_to 'invoicing parties', user_invoicing_parties_path(@current_user)
+    - if current_user
+      %button#destroy_session= "logout #{current_user.email}"
+      %button#user_settings= "change #{current_user.email}'s settings"
+      = link_to 'logout', destroy_user_session_path
+      = link_to 'customers', user_customers_path(current_user)
+      = link_to 'invoicing parties', user_invoicing_parties_path(current_user)
     = yield
 

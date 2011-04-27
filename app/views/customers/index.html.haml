@@ -1,5 +1,5 @@
 %h1 Customers
-%p= link_to t('.new_customer'), new_user_customer_path(@user)
+%p= link_to t('.new_customer'), new_user_customer_path(current_user)
 
 %table
   %thead
@@ -16,7 +16,7 @@
       %th actions
 
   %tbody
-    - for customer in @customers
+    - @customers.each do |customer|
       %tr{ :class => cycle(:odd, :even) }
         %td= customer.name
         %td= customer.number
@@ -29,8 +29,8 @@
         %td
           %ul
             - customer.invoices.each do |invoice|
-              %li.invoice= link_to invoice.number, user_invoice_path(@current_user, invoice)
-            %li.invoice.new= link_to 'new invoice', new_user_invoice_path(@current_user)
+              %li.invoice= link_to invoice.number, user_invoice_path(current_user, invoice)
+            %li.invoice.new= link_to 'new invoice', new_user_invoice_path(current_user)
         %td.action
           %button[customer, 'show'] show
           %button[customer, 'edit'] edit

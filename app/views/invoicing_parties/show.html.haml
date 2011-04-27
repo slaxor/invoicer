@@ -1,11 +1,9 @@
-%h1= t '.title'
+%h1= @invoicing_party.name
 %p
-  = link_to t('back'), invoicing_parties_path
-  = link_to t('edit'), edit_invoicing_party_path(@invoicing_party)
+  = link_to t('back'), user_invoicing_parties_path(@current_user)
+  = link_to t('edit'), edit_user_invoicing_party_path(@current_user, @invoicing_party)
 
 %dl
-  %dt name
-  %dd= @invoicing_party.name
   %dt co_line
   %dd= @invoicing_party.co_line
   %dt street

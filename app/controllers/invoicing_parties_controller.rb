@@ -4,7 +4,6 @@ class InvoicingPartiesController < ApplicationController
   # GET /invoicing_parties.json
   def index
     @invoicing_parties = @current_user.invoicing_parties.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json  { render :json => @invoicing_parties }

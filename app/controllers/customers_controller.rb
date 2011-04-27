@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class CustomersController < ApplicationController
   def index
-    @customers = @current_user.customers
+    @customers = current_user.customers
     respond_to do |format|
       format.html
       format.json  { render :json => @customers }
@@ -9,7 +9,7 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = Customer.find(params[:id])
+    @customer = current_user.customers.find(params[:id])
     respond_to do |format|
       format.html
       format.json  { render :json => @customer }
@@ -17,7 +17,7 @@ class CustomersController < ApplicationController
   end
 
   def new
-    @customer = @current_user.customers.build
+    @customer = current_user.customers.build
     respond_to do |format|
       format.html
       format.json  { render :json => @customer }
@@ -25,15 +25,15 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = @current_user.customers(params[:id])
+    @customer = current_user.customers(params[:id])
   end
 
   def create
     @customer = Customer.new(params[:customer])
-    @current_user.customers << @customer
+    current_user.customers << @customer
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to(user_customers_path(@current_user), :notice => 'Customer was successfully created.') }
+        format.html { redirect_to(user_customers_path(current_user), :notice => 'Customer was successfully created.') }
         format.json  { render :json => @customer, :status => :created, :location => @customer }
       else
         format.html { render :action => "new" }
@@ -46,7 +46,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     respond_to do |format|
       if @customer.update(params[:customer])
-        format.html { redirect_to(user_customers_path(@current_user), :notice => 'Customer was successfully updated.') }
+        format.html { redirect_to(user_customers_path(current_user), :notice => 'Customer was successfully updated.') }
         format.json  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -59,7 +59,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.destroy
     respond_to do |format|
-      format.html { redirect_to(user_customers_path(@current_user)) }
+      format.html { redirect_to(user_customers_path(current_user)) }
       format.json  { head :ok }
     end
   end

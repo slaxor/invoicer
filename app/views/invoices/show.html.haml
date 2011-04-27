@@ -1,22 +1,25 @@
-%h1= t '.title'
+%h1 Invoices
 %p
-  = link_to t('back'), invoices_path
-  = link_to t('edit'), edit_invoice_path(@invoice)
+  = link_to 'edit', edit_user_invoice_path(current_user, @invoice)
+  = link_to 'pdf', user_invoice_path(current_user, @invoice, :format => :pdf)
 
 %dl
-  %dt customer_id
-  %dd= @invoice.customer_id
+  %dt customer
+  %dd= link_to @invoice.customer.name, user_customer_path(current_user, @invoice.customer)
   %dt number
   %dd= @invoice.number
   %dt currency
   %dd= @invoice.currency
   %dt covering_text
   %dd= @invoice.covering_text
-  %dt invoicing_party_id
-  %dd= @invoice.invoicing_party_id
+  %dt invoicing_party
+  %dd= link_to @invoice.invoicing_party.name, user_invoicing_party_path(current_user, @invoice.invoicing_party)
   %dt paid
   %dd= @invoice.paid
   %dt due_on
   %dd= @invoice.due_on
   %dt printed_at
   %dd= @invoice.printed_at
+  %dt invoice_items
+  %dd
+  -#%dt= render :partial => 'invoice_items'

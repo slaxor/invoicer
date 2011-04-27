@@ -1,15 +1,9 @@
-%h1= t '.title'
-%p
-  = link_to t('back'), customers_path
-  = link_to t('edit'), edit_customer_path(@customer)
-
+%h1= @customer.name
 %dl
-  %dt name
-  %dd= @customer.name
   %dt number
   %dd= @customer.number
-  %dt user_id
-  %dd= @customer.user_id
+  %dt user
+  %dd= link_to @customer.user.login, user_path(@customer.user)
   %dt email
   %dd= @customer.email
   %dt telephone

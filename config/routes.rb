@@ -1,12 +1,15 @@
 # -*- encoding : utf-8 -*-
 Invoicer::Application.routes.draw do
-  resources :user_session
+  devise_for :users
+
+  #resources :user_session
   match '/api/:api_key/:controller/:action' do
     resources :invoices
     resources :invoicing_parties
     resources :customers
   end
 
+  devise_for :users
   resources :users do
     resources :invoices
     resources :invoicing_parties
@@ -63,7 +66,7 @@ Invoicer::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
-  root :to => "user_session#new"
+  root :to => 'users#show'
 
   # See how all your routes lay out with "rake routes"
 
