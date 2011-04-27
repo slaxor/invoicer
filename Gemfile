@@ -4,7 +4,9 @@ gem 'rails'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'devise' # users and auth
+#gem 'mongoid-devise'
 gem 'carrierwave' # file handling
+gem 'workflow_on_mongoid' #fsm
 gem 'unicorn'
 gem 'capistrano'
 gem 'ruby-debug19', :require => 'ruby-debug'
@@ -18,6 +20,7 @@ group :test, :development do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl'
+  gem 'mongoid-rspec'
   gem 'faker'
 end
 
