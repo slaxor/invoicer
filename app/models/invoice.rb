@@ -13,12 +13,10 @@ class Invoice
   field :due_on, :type => Date
   field :history, :type => Array, :default => []
 
-  attr_accessible :customer_id, :number, :currency, :covering_text, :invoicing_party_id, :workflow_state, :due_on, :printed_at,
-    :invoice_items, :history
+  #attr_accessible :customer_id, :number, :currency, :covering_text, :invoicing_party_id, :workflow_state, :due_on,
+    #:invoice_items, :history
 
   include Workflow
-
-  #workflow_column :status
 
   workflow do
     state :new do
@@ -102,6 +100,10 @@ class Invoice
 
   def gross_amount
     invoice_items.map(&:gross_amount).sum
+  end
+
+  def printed_at
+    (self.history.detect {|record| record['to'] == :printed} || {'when' => Time.now})['when']
   end
 end
 

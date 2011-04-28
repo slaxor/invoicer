@@ -4,7 +4,7 @@
 #pdf.font "Times-Roman"
 pdf.font "Helvetica"
 sender_address = [@invoice.invoicing_party.name, @invoice.invoicing_party.street, "#{@invoice.invoicing_party.post_code} #{@invoice.invoicing_party.city}"]
-print_date = @invoice.printed_at.to_s # (:german_date)
+print_date = l(@invoice.printed_at.to_date)
 
 pdf.bounding_box [pdf.margin_box.left, pdf.margin_box.top - 100], :width => 200 do
   pdf.text(format("%s | %s | %s %s",
@@ -34,15 +34,17 @@ end
 pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 30], :width => pdf.margin_box.width do
   pdf.table([
     ["#{number_with_delimiter(@invoice.hours, :separator => ",")} Stunden gemäss angehängter Leistungsaufstellung",
-       number_to_currency(@invoice.amount, :locale => :de)],
+       number_to_currency(@invoice.amount)],
     ['zuzüglich der gesetzlichen Mehrwersteuer ',
-      number_to_currency(@invoice.vat_amount, :locale => :de)],
-    ['Gesamtbetrag ', number_to_currency(@invoice.gross_amount, :locale => :de)]
-  ])
-# ], :align => { 0 => :left, 1 => :right})
+      number_to_currency(@invoice.vat_amount)],
+    ['Gesamtbetrag ', number_to_currency(@invoice.gross_amount)]
+  ]) do
+
+    column(1).align = :right
+  end
 end
 pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 30], :width => pdf.margin_box.width do
-  pdf.text ("Zahlbar bis spätestens #{@invoice.due_on.to_time.to_s} (eingehend)")
+  pdf.text ("Zahlbar bis spätestens #{l(@invoice.due_on.to_date)} (eingehend)")
 end
 # footer first page
 pdf.bounding_box [pdf.margin_box.left, pdf.margin_box.bottom + 40 ], :width => pdf.margin_box.width do
@@ -94,28 +96,30 @@ pdf.text_box(
 
 invoice_items = @invoice.invoice_items.map do |invoice_item|
   [
-    invoice_item.started_at.to_s(:medium),
-    invoice_item.ended_at.to_s(:medium),
+    l(invoice_item.started_at, :format => :numeric),
+    l(invoice_item.ended_at, :format => :numeric),
     invoice_item.pause_times,
-    number_with_delimiter(invoice_item.hours, :separator => ","),
+    number_with_delimiter(invoice_item.hours),
     invoice_item.description,
-    number_to_currency(invoice_item.amount, :locale => :de),
-    number_with_delimiter(invoice_item.vat_rate * 100, :separator => ","),
-    number_to_currency(invoice_item.vat_amount, :locale => :de),
-    number_to_currency(invoice_item.gross_amount, :locale => :de)
+    number_to_currency(invoice_item.amount),
+    number_with_delimiter(invoice_item.vat_rate * 100),
+    number_to_currency(invoice_item.vat_amount),
+    number_to_currency(invoice_item.gross_amount)
   ]
 end
 pdf.move_down 60
 pdf.table(
-  invoice_items,
-  #:border_style => :grid,
-  #:font_size => 6,
-  #:position => :center,
-  #:headers => ['Anfang', 'Ende', 'Pausen', 'Stunden', 'Beschreibung', 'Betrag', 'Mwst.-Satz', 'Mwst.', 'Brutto'],
-  #:align_headers => :center,
-  #:header_color => 'f0f0f0',
-  #:align => { 0 => :right, 1 => :right, 2 => :left, 3 => :right, 4 => :left, 5 => :right, 6 => :right, 7 => :right, 8 => :right},
+  [['Anfang', 'Ende', 'Pausen', 'Stunden', 'Beschreibung', 'Betrag', 'Mwst.-Satz', 'Mwst.', 'Brutto']] + invoice_items,
+  :cell_style => {:size => 6},
+  :header => true,
   :row_colors => ["c0ffc0", "ffffff"]
-)
+) do
+  columns(4).width = 300
+  columns(3).align = :right
+  columns(5..8).align = :right
+  #column_min_widths = [80, 80, 100, 160, 50, 30, 30, 50, 50] #geht nicht
+  row(0).style(:background_color => '404040', :text_color => 'ffffff', :size => 10)
+  row(0).align = :center
+end
 
 

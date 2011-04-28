@@ -14,8 +14,8 @@
   %dd= @invoice.covering_text
   %dt invoicing_party
   %dd= link_to @invoice.invoicing_party.name, user_invoicing_party_path(current_user, @invoice.invoicing_party)
-  %dt paid
-  %dd= @invoice.paid
+  %dt workflow_state
+  %dd= @invoice.workflow_state
   %dt due_on
   %dd= @invoice.due_on
   %dt printed_at

@@ -14,6 +14,7 @@ gem 'haml'
 gem 'sass'
 gem 'rails3-generators'
 gem 'prawn'
+gem 'prawnto'
 gem 'json'
 
 group :test, :development do
