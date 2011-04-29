@@ -4,7 +4,6 @@ gem 'rails'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'devise' # users and auth
-#gem 'mongoid-devise'
 gem 'carrierwave' # file handling
 gem 'workflow_on_mongoid' #fsm
 gem 'unicorn'
@@ -16,6 +15,10 @@ gem 'rails3-generators'
 gem 'prawn'
 gem 'prawnto'
 gem 'json'
+gem 'jquery-rails', '>= 0.2.7'
+gem "compass"
+gem 'sass'
+gem "html5-boilerplate"
 
 group :test, :development do
   gem 'rspec'

@@ -1,5 +1,5 @@
 %h1 Invoicing parties
-%p= link_to 'new', new_user_invoicing_party_path(@current_user)
+%p= link_to 'new', new_invoicing_party_path
 
 %table
   %thead
@@ -41,10 +41,9 @@
         %td
           %ul
             - invoicing_party.invoices.each do |invoice|
-              %li.invoice= link_to invoice.number, user_invoice_path(@current_user, invoice)
-            %li.invoice.new= link_to 'new invoice', new_user_invoice_path(@current_user)
+              %li.invoice= link_to invoice.number, invoice_path(invoice)
+            %li.invoice.new= link_to 'new invoice', new_invoice_path
         %td.action
-          %button[invoicing_party, 'show'] show
-          %button[invoicing_party, 'edit'] edit
-          %button[invoicing_party, 'destroy'] destroy
-
+          =link_to t('show'), invoicing_party_path(invoicing_party)
+          =link_to t('edit'), edit_invoicing_party_path(invoicing_party)
+          =link_to t('destroy'), invoicing_party_path(invoicing_party, :method => :delete)

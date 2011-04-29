@@ -1,4 +1,4 @@
-= form_for(:invoicing_party, :url => '/users/4d9325b38621e7346d000004/invoicing_parties') do |f|
+= form_for(@invoicing_party) do |f|
   - if @invoicing_party.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@invoicing_party.errors.count, 'error')} prohibited this user from being saved:"

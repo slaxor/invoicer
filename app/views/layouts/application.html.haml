@@ -12,11 +12,11 @@
       %ul#flash_message
         - flash.each do |key, value|
           %li{:class => key}= value
-    - if current_user
-      %button#destroy_session= "logout #{current_user.email}"
-      %button#user_settings= "change #{current_user.email}'s settings"
-      = link_to 'logout', destroy_user_session_path
-      = link_to 'customers', user_customers_path(current_user)
-      = link_to 'invoicing parties', user_invoicing_parties_path(current_user)
+    - if user_signed_in?
+      = link_to t('logout'), destroy_session_path(current_user)
+      = link_to t('preferences'), edit_user_path(current_user)
+      = link_to t('customers'), customers_path
+      = link_to t('invoicing parties'), invoicing_parties_path
+
     = yield
 
