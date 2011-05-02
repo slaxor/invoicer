@@ -25,7 +25,7 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = current_user.customers(params[:id])
+    @customer = current_user.customers.find(params[:id])
   end
 
   def create
@@ -33,7 +33,7 @@ class CustomersController < ApplicationController
     current_user.customers << @customer
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to(user_customers_path(current_user), :notice => 'Customer was successfully created.') }
+        format.html { redirect_to(customers_path, :notice => 'Customer was successfully created.') }
         format.json  { render :json => @customer, :status => :created, :location => @customer }
       else
         format.html { render :action => "new" }
@@ -46,7 +46,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     respond_to do |format|
       if @customer.update(params[:customer])
-        format.html { redirect_to(user_customers_path(current_user), :notice => 'Customer was successfully updated.') }
+        format.html { redirect_to(customers_path, :notice => 'Customer was successfully updated.') }
         format.json  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -59,7 +59,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.destroy
     respond_to do |format|
-      format.html { redirect_to(user_customers_path(current_user)) }
+      format.html { redirect_to(customers_path) }
       format.json  { head :ok }
     end
   end

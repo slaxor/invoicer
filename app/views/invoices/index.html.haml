@@ -1,5 +1,5 @@
 %h1 Invoices
-%p= link_to 'New invoice', new_user_invoice_path(@current_user)
+%p= link_to 'New invoice', new_invoice_path
 
 %table
   %thead
@@ -9,12 +9,10 @@
       %th currency
       %th covering_text
       %th invoicing_party_id
-      %th paid
+      %th workflow_state
       %th due_on
       %th printed_at
       %th actions
-      %th pdf
-
   %tbody
     - for invoice in @invoices
       %tr{ :class => cycle(:odd, :even) }
@@ -23,10 +21,10 @@
         %td= invoice.number
         %td= invoice.currency
         %td= invoice.covering_text
-        %td= invoice.paid
+        %td= invoice.workflow_state
         %td= invoice.due_on
         %td= invoice.printed_at
         %td.action
-          %button[invoice, 'edit'] edit
-          %button[invoice, 'destroy'] destroy
-        -#%td= link_to 'download pdf', user_invoice_path(@current_user,invoice, :format => :pdf)
+          = link_to t('edit'), edit_invoice_path(invoice)
+          = link_to t('destroy'), invoice_path(invoice), :method => :delete
+          = link_to t('download pdf'), invoice_path(invoice, :format => :pdf)

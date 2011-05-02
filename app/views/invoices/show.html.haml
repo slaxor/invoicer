@@ -1,11 +1,11 @@
 %h1 Invoices
 %p
-  = link_to 'edit', edit_user_invoice_path(current_user, @invoice)
-  = link_to 'pdf', user_invoice_path(current_user, @invoice, :format => :pdf)
+  = link_to 'edit', edit_invoice_path(@invoice)
+  = link_to 'pdf', invoice_path(@invoice, :format => :pdf)
 
 %dl
   %dt customer
-  %dd= link_to @invoice.customer.name, user_customer_path(current_user, @invoice.customer)
+  %dd= link_to @invoice.customer.name, customer_path(@invoice.customer)
   %dt number
   %dd= @invoice.number
   %dt currency
@@ -13,7 +13,7 @@
   %dt covering_text
   %dd= @invoice.covering_text
   %dt invoicing_party
-  %dd= link_to @invoice.invoicing_party.name, user_invoicing_party_path(current_user, @invoice.invoicing_party)
+  %dd= link_to @invoice.invoicing_party.name, invoicing_party_path(@invoice.invoicing_party)
   %dt workflow_state
   %dd= @invoice.workflow_state
   %dt due_on

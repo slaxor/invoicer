@@ -17,4 +17,8 @@ class User
   references_many :invoicing_parties, :dependent => :delete_all
 
   mount_uploader :avatar, AvatarUploader
+
+  def invoices
+    self.customers.map(&:invoices).flatten
+  end
 end

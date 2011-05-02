@@ -6,17 +6,18 @@ class InvoiceItem
   field :description, :type => String
   field :started_at, :type => DateTime
   field :ended_at, :type => DateTime
-  field :price, :type => Float
+  field :price, :type => Float #wir werden die rundungfehler sicher überleben und…
   field :pricing_strategy, :type => String, :default => 'hourly'
   field :pricing_unit, :type => String
-  field :vat_rate, :type => Float
+  field :vat_rate, :type => Float # …BigDecimal speichert als String was ich irgendwie hässlich find
+
 
   scope :default,  :order => :started_at
 
   accepts_nested_attributes_for :pauses, :allow_destroy => true
 
   def hours
-    (ended_at - started_at) / 3600 - pause_length
+    (ended_at - started_at) / 3600.0 - pause_length
   end
 
   def amount
@@ -43,6 +44,6 @@ class InvoiceItem
   end
 
   def pause_length
-    pauses.map(&:length).sum
+    pauses.sum(&:length)
   end
 end

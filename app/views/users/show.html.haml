@@ -1,6 +1,6 @@
 %h1= "#{current_user.email}"
 %p
   = link_to 'edit', edit_user_path(current_user)
-  = link_to 'customers', user_customers_path(current_user)
-  = link_to 'invoicing_parties', user_invoicing_parties_path(current_user)
+  = link_to 'customers', customers_path
+  = link_to 'invoicing_parties', invoicing_parties_path
 

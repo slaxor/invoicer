@@ -14,7 +14,6 @@ describe Customer do
     end
 
     it {
-      pending 'stupid txl8 error i don`t understand'
       should validate_uniqueness_of :name
     }
   end

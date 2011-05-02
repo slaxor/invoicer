@@ -38,6 +38,8 @@ class InvoicesController < ApplicationController
 
   def edit
     @invoice = Invoice.find(params[:id])
+    @customers = current_user.customers.map {|c| [c.name, c.id]}
+    @invoicing_parties = current_user.invoicing_parties.map {|ip| [ip.name, ip.id]}
   end
 
   def create
@@ -66,6 +68,9 @@ class InvoicesController < ApplicationController
         format.json  { render :json => @invoice.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  def handle_workflow_event
   end
 
   def destroy

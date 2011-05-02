@@ -44,6 +44,7 @@ class Invoice
       event :remind, :transitions_to => :reminded
       event :cancel, :transitions_to => :cancelled
     end
+
     state :reminded do
       event :remind, :transitions_to => :reminded
       event :apply_for_court_order, :transitions_to => :applied_for_court_order
@@ -82,24 +83,36 @@ class Invoice
     end
   end
 
+  after_initialize :set_default_number, :set_overdue_if
+
+  def user
+    self.customer.user
+  end
+
   def set_default_number
-    self.number = format('%s-%s%0.3i', customer.number, Time.now.to_s(:month_stamp), self.class.count(:conditions => {:customer_id => customer_id}))
+    if self.number.blank?
+      self.number = format('%s-%s%0.3i', customer.number, Time.now.to_s(:month_stamp), self.class.count(:conditions => {:customer_id => customer_id}))
+    end
+  end
+
+  def set_overdue_if
+    update_attribute(:workflow_state, 'overdue') if (issued? && due_on.to_date < Date.today)
   end
 
   def hours
-    invoice_items.map(&:hours).sum
+    invoice_items.sum(&:hours)
   end
 
   def amount
-    invoice_items.map(&:amount).sum
+    invoice_items.sum(&:amount)
   end
 
   def vat_amount
-    invoice_items.map(&:vat_amount).sum
+    invoice_items.sum(&:vat_amount)
   end
 
   def gross_amount
-    invoice_items.map(&:gross_amount).sum
+    invoice_items.sum(&:gross_amount)
   end
 
   def printed_at

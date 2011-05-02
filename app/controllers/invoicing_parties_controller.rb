@@ -41,7 +41,7 @@ class InvoicingPartiesController < ApplicationController
     @current_user.invoicing_parties << @invoicing_party
     respond_to do |format|
       if @invoicing_party.save
-        format.html { redirect_to(user_invoicing_parties_path(@current_user), :notice => 'Invoicing party was successfully created.') }
+        format.html { redirect_to(invoicing_parties_path, :notice => 'Invoicing party was successfully created.') }
         format.json  { render :json => @invoicing_party, :status => :created, :location => @invoicing_party }
       else
         format.html { render :action => "new" }

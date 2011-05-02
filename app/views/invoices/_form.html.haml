@@ -1,5 +1,4 @@
--#= form_for(:invoice, :url => '/users/4d9325b38621e7346d000004/invoices') do |f|
-= form_for(:user, @invoice) do |f|
+= form_for(@invoice) do |f|
   - if @invoice.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@invoice.errors.count, 'error')} prohibited this user from being saved:"
@@ -9,7 +8,7 @@
 
   .field
     = f.label :customer
-    = f.select @current_user.customers
+    -#= f.select @customers[0], @customers[1]
   .field
     = f.label :number
     = f.text_field :number
@@ -24,7 +23,9 @@
     = f.text_field :invoicing_party_id
   .field
     = f.label :workflow_state
-    = f.check_box :workflow_state
+    - @invoice.current_state.events.keys.each do |event|
+      = button_to event
+    -#= f.select :workflow_state, @invoice.current_state.events.keys
   .field
     = f.label :due_on
     = f.text_field :due_on
