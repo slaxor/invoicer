@@ -2,6 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.0)
+    ZenTest (4.5.0)
     abstract (1.0.0)
     actionmailer (3.0.7)
       actionpack (= 3.0.7)
@@ -150,6 +151,7 @@ GEM
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
     sass (3.1.1)
+    spork (0.8.4)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -171,6 +173,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest
   bson_ext
   capistrano
   carrierwave
@@ -192,5 +195,6 @@ DEPENDENCIES
   rspec-rails
   ruby-debug19
   sass
+  spork
   unicorn
   workflow_on_mongoid

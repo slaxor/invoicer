@@ -23,6 +23,8 @@ gem "html5-boilerplate"
 group :test, :development do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'ZenTest'
+  gem 'spork'
   gem 'factory_girl'
   gem 'mongoid-rspec'
   gem 'faker'

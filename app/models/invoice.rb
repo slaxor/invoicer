@@ -36,11 +36,13 @@ class Invoice
 
     state :issued do
       event :received_payment, :transitions_to => :paid
+      event :received_partial_payment, :transitions_to => :paid_partially
       event :cancel, :transitions_to => :cancelled
     end
 
     state :overdue do
       event :received_payment, :transitions_to => :paid
+      event :received_partial_payment, :transitions_to => :paid_partially
       event :remind, :transitions_to => :reminded
       event :cancel, :transitions_to => :cancelled
     end
@@ -49,6 +51,7 @@ class Invoice
       event :remind, :transitions_to => :reminded
       event :apply_for_court_order, :transitions_to => :applied_for_court_order
       event :received_payment, :transitions_to => :paid
+      event :received_partial_payment, :transitions_to => :paid_partially
       event :cancel, :transitions_to => :cancelled
     end
 
@@ -57,12 +60,14 @@ class Invoice
     # ausgestellt werden muss...
     state :applied_for_court_order do
       event :received_payment, :transitions_to => :paid
+      event :received_partial_payment, :transitions_to => :paid_partially
       event :won, :transitions_to => :summons_issued
       event :lost, :transitions_to => :unenforcable
     end
 
     state :summons_issued do
       event :received_payment, :transitions_to => :paid
+      event :received_partial_payment, :transitions_to => :paid_partially
       event :cancel, :transitions_to => :cancelled
       event :enforcable, :transitions_to => :enforcable
       event :unenforcable, :transitions_to => :unenforcable
@@ -83,16 +88,10 @@ class Invoice
     end
   end
 
-  after_initialize :set_default_number, :set_overdue_if
+  after_initialize :set_overdue_if
 
   def user
     self.customer.user
-  end
-
-  def set_default_number
-    if self.number.blank?
-      self.number = format('%s-%s%0.3i', customer.number, Time.now.to_s(:month_stamp), self.class.count(:conditions => {:customer_id => customer_id}))
-    end
   end
 
   def set_overdue_if

@@ -13,7 +13,6 @@ class Customer
   field :post_code
   field :city
   field :country
-  #field :user_id
 
   attr_accessible :name, :number, :email, :telephone, :street, :post_code, :city, :country
 end

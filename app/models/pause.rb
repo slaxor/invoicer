@@ -1,7 +1,7 @@
 class Pause
   include Mongoid::Document
 
-  embedded_in:service_invoice_item
+  embedded_in :invoice_item
 
   field :description, :type => String
   field :started_at, :type => DateTime
