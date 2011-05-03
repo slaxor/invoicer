@@ -1,0 +1,8 @@
+de:
+  date:
+    formats:
+      numeric_month: "%m"
+  time:
+    formats:
+      numeric: "%d.%m.%y %H:%M"
+
