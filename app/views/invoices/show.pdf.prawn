@@ -30,7 +30,6 @@ end
 pdf.bounding_box([pdf.margin_box.left, pdf.cursor - 50], :width => pdf.margin_box.width) do
   pdf.text @invoice.covering_text
 end
-debugger
 pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 30], :width => pdf.margin_box.width do
   pdf.table([
     ["#{number_with_delimiter(@invoice.hours, :separator => ",")} Stunden gemäss angehängter Leistungsaufstellung",

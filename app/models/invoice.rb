@@ -7,19 +7,21 @@ class Invoice
   embeds_many :invoice_items
 
   field :number, :type => String
-  field :currency, :type => String
+  field :purchase_order, :type => String
+  field :currency, :type => String, :default => '€'
   field :covering_text, :type => String
-  field :workflow_state, :type => String, :default => 'new'
+  field :workflow_state, :type => String, :default => 'started'
   field :due_on, :type => Date
   field :history, :type => Array, :default => []
 
-  #attr_accessible :customer_id, :number, :currency, :covering_text, :invoicing_party_id, :workflow_state, :due_on,
-    #:invoice_items, :history
+
+  attr_accessible :customer_id, :number, :purchase_order, :currency, :covering_text, :invoicing_party_id, :workflow_state, :due_on,
+    :invoice_items, :history
 
   include Workflow
 
   workflow do
-    state :new do
+    state :started do
       event :complete, :transitions_to => :completed
       event :cancel, :transitions_to => :cancelled
     end
@@ -38,6 +40,7 @@ class Invoice
       event :received_payment, :transitions_to => :paid
       event :received_partial_payment, :transitions_to => :paid_partially
       event :cancel, :transitions_to => :cancelled
+      event :due_date_exceeded, :transitions_to => :overdue
     end
 
     state :overdue do
@@ -95,7 +98,7 @@ class Invoice
   end
 
   def set_overdue_if
-    update_attribute(:workflow_state, 'overdue') if (issued? && due_on.to_date < Date.today)
+    self.due_date_exceeded! if (issued? && due_on.to_date < Date.today)
   end
 
   def hours

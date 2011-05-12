@@ -1,0 +1,49 @@
+
+digraph invoices_workflow {
+  graph [rankdir="LR", size="7,11.6", ratio="fill"];
+  node [shape=box];
+  edge [len=1];
+      
+  new [label="new"];
+  new -> completed [label="Complete" ];
+  new -> cancelled [label="Cancel" ];
+  completed [label="completed"];
+  completed -> printed [label="Print" ];
+  completed -> cancelled [label="Cancel" ];
+  printed [label="printed"];
+  printed -> issued [label="Issue" ];
+  printed -> cancelled [label="Cancel" ];
+  issued [label="issued"];
+  issued -> paid [label="Received payment" ];
+  issued -> paid_partially [label="Received partial payment" ];
+  issued -> cancelled [label="Cancel" ];
+  issued -> overdue [label="Due date exceeded" ];
+  overdue [label="overdue"];
+  overdue -> paid [label="Received payment" ];
+  overdue -> paid_partially [label="Received partial payment" ];
+  overdue -> reminded [label="Remind" ];
+  overdue -> cancelled [label="Cancel" ];
+  reminded [label="reminded"];
+  reminded -> reminded [label="Remind" ];
+  reminded -> applied_for_court_order [label="Apply for court order" ];
+  reminded -> paid [label="Received payment" ];
+  reminded -> paid_partially [label="Received partial payment" ];
+  reminded -> cancelled [label="Cancel" ];
+  applied_for_court_order [label="applied_for_court_order"];
+  applied_for_court_order -> paid [label="Received payment" ];
+  applied_for_court_order -> paid_partially [label="Received partial payment" ];
+  applied_for_court_order -> summons_issued [label="Won" ];
+  applied_for_court_order -> unenforcable [label="Lost" ];
+  summons_issued [label="summons_issued"];
+  summons_issued -> paid [label="Received payment" ];
+  summons_issued -> paid_partially [label="Received partial payment" ];
+  summons_issued -> cancelled [label="Cancel" ];
+  summons_issued -> enforcable [label="Enforcable" ];
+  summons_issued -> unenforcable [label="Unenforcable" ];
+  paid_partially [label="paid_partially"];
+  paid [label="paid"];
+  cancelled [label="cancelled"];
+  enforcable [label="enforcable"];
+  unenforcable [label="unenforcable"];
+}
+

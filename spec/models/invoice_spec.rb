@@ -18,6 +18,8 @@ describe Invoice do
     end
 
     it 'should have events complete, print, issue and receive_payment with appropriate states' do
+      expect {@invoice.complete!}.to change(@invoice, :workflow_state).from(:new).to(:completed)
+
       @invoice.complete!
       @invoice.completed?.should be_true
       @invoice.print!

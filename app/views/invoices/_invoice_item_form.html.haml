@@ -1,5 +1,2 @@
-.invoice_items
-  - f.fields_for :invoice_items do |ii|
-    .field
-      = ii.label :started_at
-      = ii.text_field :started_at
+.invoice_item= invoice_item.attributes
+

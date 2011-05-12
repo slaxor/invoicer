@@ -6,3 +6,6 @@ de:
     formats:
       numeric: "%d.%m.%y %H:%M"
 
+  errors:
+    messages:
+      not_saved: 'Konnte nicht gespeichert werden'

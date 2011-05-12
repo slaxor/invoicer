@@ -8,6 +8,7 @@ gem 'carrierwave' # file handling
 gem 'workflow_on_mongoid' #fsm
 gem 'unicorn'
 gem 'capistrano'
+gem 'capistrano-ext'
 gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'haml'
 gem 'sass'
@@ -43,3 +44,5 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+gem "irt"

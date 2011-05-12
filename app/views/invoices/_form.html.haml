@@ -13,11 +13,14 @@
     = f.label :number
     = f.text_field :number
   .field
+    = f.label :purchase_order
+    = f.text_field :purchase_order
+  .field
     = f.label :currency
     = f.text_field :currency
   .field
     = f.label :covering_text
-    = f.text_field :covering_text
+    = f.text_area :covering_text
   .field
     = f.label :invoicing_party_id
     = f.text_field :invoicing_party_id
@@ -28,12 +31,15 @@
     -#= f.select :workflow_state, @invoice.current_state.events.keys
   .field
     = f.label :due_on
-    = f.text_field :due_on
-  .field
-    = f.label :printed_at
-    = f.text_field :printed_at
-
-    = render :partial => 'invoice_item_form', :locals => {:f => f}
+    = f.text_field :due_on, :type => 'date'
+  - @invoice.history.each do |entry|
+    .history
+      = entry[:from]
+      = entry[:to]
+      = entry[:triggering_event]
+      = entry[:when]
+  - @invoice.invoice_items.each do |invoice_item|
+    = render :partial => 'invoice_item_form', :locals => {:invoice_item => invoice_item}
 
   .actions
     = f.submit

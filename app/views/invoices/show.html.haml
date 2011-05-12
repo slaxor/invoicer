@@ -8,6 +8,8 @@
   %dd= link_to @invoice.customer.name, customer_path(@invoice.customer)
   %dt number
   %dd= @invoice.number
+  %dt purchase_order
+  %dd= @invoice.purchase_order
   %dt currency
   %dd= @invoice.currency
   %dt covering_text
@@ -15,11 +17,14 @@
   %dt invoicing_party
   %dd= link_to @invoice.invoicing_party.name, invoicing_party_path(@invoice.invoicing_party)
   %dt workflow_state
-  %dd= @invoice.workflow_state
+  %dd= @invoice.current_state
   %dt due_on
   %dd= @invoice.due_on
-  %dt printed_at
-  %dd= @invoice.printed_at
   %dt invoice_items
-  %dd
+  %dd= @invoice.invoice_items
   -#%dt= render :partial => 'invoice_items'
+  %dt history
+  %dd
+    - @invoice.history.each do |entry|
+      .history
+        = "at #{entry['when']} #{entry['triggering_event']} changed from #{entry['from']} to #{entry['to']}"
