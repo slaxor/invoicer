@@ -32,12 +32,6 @@
   .field
     = f.label :due_on
     = f.text_field :due_on, :type => 'date'
-  - @invoice.history.each do |entry|
-    .history
-      = entry[:from]
-      = entry[:to]
-      = entry[:triggering_event]
-      = entry[:when]
   - @invoice.invoice_items.each do |invoice_item|
     = render :partial => 'invoice_item_form', :locals => {:invoice_item => invoice_item}
 

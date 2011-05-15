@@ -1,0 +1,14 @@
+%table
+  %thead
+    %th.history_when= t('when')
+    %th.history_event= t('event')
+    %th.history_from= t('from')
+    %th.history_to= t('to')
+  %tbody
+    %tr
+      - invoice.history.each do |history|
+        %td= l(history['when'], :format => :numeric)
+        %td= t(history['triggering_event'])
+        %td= t(history['from'])
+        %td= t(history['to'])
+

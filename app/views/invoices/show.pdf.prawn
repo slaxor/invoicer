@@ -28,17 +28,18 @@ pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 100], :width => pdf.margin_b
 end
 
 pdf.bounding_box([pdf.margin_box.left, pdf.cursor - 50], :width => pdf.margin_box.width) do
+  pdf.text "Purchase Order: #{@invoice.purchase_order}" if @invoice.purchase_order
   pdf.text @invoice.covering_text
 end
-pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 30], :width => pdf.margin_box.width do
+pdf.bounding_box [pdf.margin_box.left + 20, pdf.cursor - 30], :width => pdf.margin_box.width do
   pdf.table([
     ["#{number_with_delimiter(@invoice.hours, :separator => ",")} Stunden gemäss angehängter Leistungsaufstellung",
        number_to_currency(@invoice.amount)],
     ['zuzüglich der gesetzlichen Mehrwersteuer ',
       number_to_currency(@invoice.vat_amount)],
     ['Gesamtbetrag ', number_to_currency(@invoice.gross_amount)]
-  ]) do
-
+  ], :cell_style => {:borders => []}) do
+    row(-1).style(:font_style => :bold)
     column(1).align = :right
   end
 end

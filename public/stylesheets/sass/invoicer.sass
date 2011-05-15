@@ -1,5 +1,18 @@
+@import "compass/css3/font-face"
+@import "compass/css3/border-radius"
+@import "compass/css3/images"
+$blueprint-grid-columns: 12
+@import "blueprint/grid"
+@import "blueprint/buttons"
+
++font-face("Gentium Italic", font-files("fonts/ttf-sil-gentium/GenI102.ttf", truetype))
++font-face("Gentium Bold Italic", font-files("fonts/ttf-sil-gentium/GenAI102.ttf", truetype))
++font-face("Gentium", font-files("fonts/ttf-sil-gentium/GenR102.ttf", truetype))
++font-face("Gentium Bold", font-files("fonts/ttf-sil-gentium/GenAR102.ttf", truetype))
+
 body
-  //background-image: -moz-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet)
+  font-family: "Gentium"
+  +background-image(linear-gradient(left top, #efefff, #efefdd))
 
 table
   tr
@@ -55,6 +68,11 @@ label
 .fatal
   background-color: rgba(255,0, 0, 0.9)
 
+//invoice index
+.invoice_items table
+  width: 100%
+  border: 0
+
 .details-list
   display: none
 
@@ -76,7 +94,8 @@ label
   background: url("/images/silk.png") repeat scroll -5px -734px transparent
 
 .invoices
-  background: url("/images/silk.png") repeat scroll -1407px -871px transparent
+  //+linear-gradient(color-stops(white, black))
+  //background: url("/images/silk.png") repeat scroll -1407px -871px transparent
 
 .new
   background: url("/images/silk.png") repeat scroll -6px -21px transparent

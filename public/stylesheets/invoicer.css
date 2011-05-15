@@ -1,25 +1,68 @@
+@font-face {
+  font-family: "Gentium Italic";
+  src: url('/fonts/fonts/ttf-sil-gentium/GenI102.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Gentium Bold Italic";
+  src: url('/fonts/fonts/ttf-sil-gentium/GenAI102.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Gentium";
+  src: url('/fonts/fonts/ttf-sil-gentium/GenR102.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Gentium Bold";
+  src: url('/fonts/fonts/ttf-sil-gentium/GenAR102.ttf') format('truetype');
+}
+
+/* line 13, sass/invoicer.sass */
+body {
+  font-family: "Gentium";
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, #efefff), color-stop(100%, #efefdd));
+  background-image: -webkit-linear-gradient(left top, #efefff, #efefdd);
+  background-image: -moz-linear-gradient(left top, #efefff, #efefdd);
+  background-image: -o-linear-gradient(left top, #efefff, #efefdd);
+  background-image: linear-gradient(left top, #efefff, #efefdd);
+}
+
+/* line 18, sass/invoicer.sass */
 table tr {
-  border: 1px solid #404040; }
-  table tr th {
-    border: 1px solid #404040;
-    padding: 2px 14px;
-    font-weight: bold; }
-  table tr td {
-    padding: 2px 14px;
-    border: 1px dotted #404040; }
+  border: 1px solid #404040;
+}
+/* line 20, sass/invoicer.sass */
+table tr th {
+  border: 1px solid #404040;
+  padding: 2px 14px;
+  font-weight: bold;
+}
+/* line 24, sass/invoicer.sass */
+table tr td {
+  padding: 2px 14px;
+  border: 1px dotted #404040;
+}
 
+/* line 28, sass/invoicer.sass */
 fieldset {
-  border: 0; }
+  border: 0;
+}
 
+/* line 31, sass/invoicer.sass */
 strong {
   font-style: italic;
   font-variant: small-caps;
-  font-weight: lighter; }
+  font-weight: lighter;
+}
 
+/* line 36, sass/invoicer.sass */
 label {
   color: rgba(60, 60, 60, 0.7);
-  display: block; }
+  display: block;
+}
 
+/* line 40, sass/invoicer.sass */
 .window {
   border: 1px solid #a0a0a0;
   display: inline-table;
@@ -27,8 +70,10 @@ label {
   border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
-  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.9); }
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.9);
+}
 
+/* line 50, sass/invoicer.sass */
 #flashmsg {
   position: fixed;
   left: 30%;
@@ -40,64 +85,102 @@ label {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   text-align: center;
-  padding: 4px; }
+  padding: 4px;
+}
 
+/* line 62, sass/invoicer.sass */
 .info {
-  background-color: rgba(0, 255, 0, 0.3); }
+  background-color: rgba(0, 255, 0, 0.3);
+}
 
+/* line 64, sass/invoicer.sass */
 .warn {
-  background-color: rgba(255, 255, 0, 0.3); }
+  background-color: rgba(255, 255, 0, 0.3);
+}
 
+/* line 66, sass/invoicer.sass */
 .error {
-  background-color: rgba(255, 0, 0, 0.3); }
+  background-color: rgba(255, 0, 0, 0.3);
+}
 
+/* line 68, sass/invoicer.sass */
 .fatal {
-  background-color: rgba(255, 0, 0, 0.9); }
+  background-color: rgba(255, 0, 0, 0.9);
+}
 
+/* line 72, sass/invoicer.sass */
+.invoice_items table {
+  width: 100%;
+  border: 0;
+}
+
+/* line 76, sass/invoicer.sass */
 .details-list {
-  display: none; }
+  display: none;
+}
 
+/* line 79, sass/invoicer.sass */
 .details-list.show {
-  display: block; }
+  display: block;
+}
 
+/* line 82, sass/invoicer.sass */
 .details-list li {
-  list-style: none; }
+  list-style: none;
+}
 
+/* line 85, sass/invoicer.sass */
 .new, .edit, .delete, .details, .invoices, .ok, .cancel {
   display: inline-block;
   height: 16px;
   width: 16px;
   border: 0;
   float: right;
-  margin-left: 6px; }
+  margin-left: 6px;
+}
 
+/* line 93, sass/invoicer.sass */
 .details {
-  background: url("/images/silk.png") repeat scroll -5px -734px transparent; }
+  background: url("/images/silk.png") repeat scroll -5px -734px transparent;
+}
 
-.invoices {
-  background: url("/images/silk.png") repeat scroll -1407px -871px transparent; }
-
+/* line 100, sass/invoicer.sass */
 .new {
   background: url("/images/silk.png") repeat scroll -6px -21px transparent;
-  top: -4em; }
+  top: -4em;
+}
 
+/* line 104, sass/invoicer.sass */
 .edit {
-  background: url("/images/silk.png") repeat scroll -1126px -871px transparent; }
+  background: url("/images/silk.png") repeat scroll -1126px -871px transparent;
+}
 
+/* line 107, sass/invoicer.sass */
 .delete {
-  background: url("/images/silk.png") repeat scroll -566px -242px transparent; }
+  background: url("/images/silk.png") repeat scroll -566px -242px transparent;
+}
 
+/* line 110, sass/invoicer.sass */
 .ok {
-  background: url("/images/silk.png") repeat scroll -6px -4px transparent; }
+  background: url("/images/silk.png") repeat scroll -6px -4px transparent;
+}
 
+/* line 113, sass/invoicer.sass */
 .cancel {
-  background: url("/images/silk.png") repeat scroll -286px -293px transparent; }
+  background: url("/images/silk.png") repeat scroll -286px -293px transparent;
+}
 
+/* line 116, sass/invoicer.sass */
 .unpaid {
-  background-color: #ffffa0; }
+  background-color: #ffffa0;
+}
 
+/* line 119, sass/invoicer.sass */
 .paid {
-  background-color: #d0ffd0; }
+  background-color: #d0ffd0;
+}
 
+/* line 122, sass/invoicer.sass */
 .paid {
-  background-color: #ffd0d0; }
+  background-color: #ffd0d0;
+}

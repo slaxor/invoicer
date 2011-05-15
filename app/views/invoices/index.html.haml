@@ -4,27 +4,34 @@
 %table
   %thead
     %tr
-      %th customer
-      %th number
-      %th currency
-      %th covering_text
-      %th invoicing_party_id
-      %th workflow_state
-      %th due_on
-      %th printed_at
-      %th actions
+      %th= t('customer')
+      %th= t('invoicing_party')
+      %th= t('number')
+      %th= t('purchase_order')
+      %th= t('currency')
+      %th= t('covering_text')
+      %th= t('workflow_state')
+      %th= t('due_on')
+      %th= t('actions')
   %tbody
-    - for invoice in @invoices
+    - @invoices.each do |invoice|
       %tr{ :class => cycle(:odd, :even) }
-        %td= invoice.customer.name
-        %td= invoice.invoicing_party.name
+        %td= link_to(invoice.customer.name, customer_path(invoice.customer))
+        %td= link_to(invoice.invoicing_party.name, invoicing_party_path(invoice.invoicing_party))
         %td= invoice.number
+        %td= invoice.purchase_order
         %td= invoice.currency
         %td= invoice.covering_text
-        %td= invoice.workflow_state
-        %td= invoice.due_on
-        %td= invoice.printed_at
+        %td
+          - workflow_tag(invoice)
+        %td= l(invoice.due_on.to_date)
         %td.action
           = link_to t('edit'), edit_invoice_path(invoice)
           = link_to t('destroy'), invoice_path(invoice), :method => :delete
-          = link_to t('download pdf'), invoice_path(invoice, :format => :pdf)
+          = link_to t('download_pdf'), invoice_path(invoice, :format => :pdf)
+      %tr.invoice_items
+        %td{:colspan => '100%'}
+          =render('invoice_items', :invoice => invoice) unless invoice.invoice_items.empty?
+      %tr.history
+        %td{:colspan => '100%'}
+          =render('history', :invoice => invoice) unless invoice.history.empty?

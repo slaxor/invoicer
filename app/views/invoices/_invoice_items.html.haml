@@ -1,27 +1,19 @@
 %table
   %thead
     %tr
-      %th description
-      %th started_at
-      %th ended_at
-      %th pauses
-      %th pricing_strategy
-      %th pricing_unit
-      %th vat_rate
-
+      %th.description= t('description')
+      %th.started_at= t('started_at')
+      %th.ended_at= t('ended_at')
+      %th.pauses= t('pauses')
+      %th.pricing_strategy= t('pricing_strategy')
+      %th.vat_rate= t('vat_rate')
   %tbody
-    - @invoice.invoice_items.each do |invoice_item|
+    - invoice.invoice_items.each do |invoice_item|
       %tr{ :class => cycle(:odd, :even) }
-        %td= invoice_item['description']
-        %td= invoice_item['started_at']
-        %td= invoice_item['ended_at']
-        %td= render :partial => 'pauses', :locals => {:pauses => invoice_item['pauses']}
-        %td= invoice_item['pricing_strategy']
-        %td= invoice_item['pricing_unit']
-        %td= invoice_item['vat_rate']
-        -#%td
-          -#%ul
-            -#- customer.invoices.each do |invoice|
-              -#%li.invoice= link_to invoice.number, user_invoice_path(@current_user, invoice)
-            -#%li.invoice.new= link_to 'new invoice', new_user_invoice_path(@current_user)
+        %td= invoice_item.description
+        %td= l(invoice_item.started_at, :format => :numeric)
+        %td= l(invoice_item.ended_at, :format => :numeric)
+        %td= invoice_item.pause_times
+        %td= t(invoice_item.pricing_strategy)
+        %td= invoice_item.vat_rate
 
