@@ -58,9 +58,8 @@ class InvoicesController < ApplicationController
 
   def update
     @invoice = Invoice.find(params[:id])
-
     respond_to do |format|
-      if @invoice.update(params[:invoice])
+      if @invoice.update_attributes(params[:invoice])
         format.html { redirect_to(@invoice, :notice => 'Invoice was successfully updated.') }
         format.json  { head :ok }
       else
@@ -71,6 +70,12 @@ class InvoicesController < ApplicationController
   end
 
   def handle_workflow_event
+    invoice = Invoice.find(params[:id])
+    if invoice.current_state.events.keys.include?(params[:event].to_sym)
+      render :json => invoice.send("#{params[:event]}!")
+    else
+      head :unprocessable_entity
+    end
   end
 
   def destroy

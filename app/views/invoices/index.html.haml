@@ -1,37 +1,36 @@
 %h1 Invoices
 %p= link_to 'New invoice', new_invoice_path
-
-%table
-  %thead
-    %tr
-      %th= t('customer')
-      %th= t('invoicing_party')
-      %th= t('number')
-      %th= t('purchase_order')
-      %th= t('currency')
-      %th= t('covering_text')
-      %th= t('workflow_state')
-      %th= t('due_on')
-      %th= t('actions')
-  %tbody
-    - @invoices.each do |invoice|
-      %tr{ :class => cycle(:odd, :even) }
-        %td= link_to(invoice.customer.name, customer_path(invoice.customer))
-        %td= link_to(invoice.invoicing_party.name, invoicing_party_path(invoice.invoicing_party))
-        %td= invoice.number
-        %td= invoice.purchase_order
-        %td= invoice.currency
-        %td= invoice.covering_text
-        %td
-          - workflow_tag(invoice)
-        %td= l(invoice.due_on.to_date)
-        %td.action
-          = link_to t('edit'), edit_invoice_path(invoice)
-          = link_to t('destroy'), invoice_path(invoice), :method => :delete
-          = link_to t('download_pdf'), invoice_path(invoice, :format => :pdf)
-      %tr.invoice_items
-        %td{:colspan => '100%'}
-          =render('invoice_items', :invoice => invoice) unless invoice.invoice_items.empty?
-      %tr.history
-        %td{:colspan => '100%'}
-          =render('history', :invoice => invoice) unless invoice.history.empty?
+- @invoices.each do |invoice|
+  %table
+    %thead
+      %tr
+        %th= t('customer')
+        %th= t('invoicing_party')
+        %th= t('number')
+        %th= t('purchase_order')
+        %th= t('currency')
+        %th= t('covering_text')
+        %th= t('workflow_state')
+        %th= t('due_on')
+        %th= t('actions')
+    %tbody
+    %tr{ :class => invoice.current_state, :id => "invoice_#{invoice.id}" }
+      %td= link_to(invoice.customer.name, customer_path(invoice.customer))
+      %td= link_to(invoice.invoicing_party.name, invoicing_party_path(invoice.invoicing_party))
+      %td= invoice.number
+      %td= invoice.purchase_order
+      %td= invoice.currency
+      %td= invoice.covering_text
+      %td
+        - workflow_tag(invoice)
+      %td= l(invoice.due_on.to_date)
+      %td.action
+        = link_to t('edit'), edit_invoice_path(invoice)
+        = link_to t('destroy'), invoice_path(invoice), :method => :delete
+        = link_to t('download_pdf'), invoice_path(invoice, :format => :pdf)
+    %tr{:class => "#{invoice.current_state} invoice_items"}
+      %td{:colspan => '100%'}
+        =render('invoice_items', :invoice => invoice) unless invoice.invoice_items.empty?
+    %tr{:class => "#{invoice.current_state} history"}
+      %td{:colspan => '100%'}
+        =render('history', :invoice => invoice) unless invoice.history.empty?

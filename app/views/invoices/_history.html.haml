@@ -5,9 +5,9 @@
     %th.history_from= t('from')
     %th.history_to= t('to')
   %tbody
-    %tr
-      - invoice.history.each do |history|
-        %td= l(history['when'], :format => :numeric)
+    - invoice.history.each do |history|
+      %tr
+        %td= l(history['when'], :format => :numeric) rescue 'INVALID :('
         %td= t(history['triggering_event'])
         %td= t(history['from'])
         %td= t(history['to'])

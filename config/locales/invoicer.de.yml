@@ -41,7 +41,6 @@ de:
   received_partial_payment: 'teilweise bezahlt'
   due_date_exceeded: 'Zahlungsziel überschritten'
   overdue: 'überfällig'
-  received_payment: ''
   remind: 'erinnere'
   reminded: 'erinnert'
   apply_for_court_order: 'beantrage Mahnbescheid'
