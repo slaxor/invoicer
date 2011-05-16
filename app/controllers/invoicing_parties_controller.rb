@@ -53,7 +53,7 @@ class InvoicingPartiesController < ApplicationController
   def update
     @invoicing_party = InvoicingParty.find(params[:id])
     respond_to do |format|
-      if @invoicing_party.update(params[:invoicing_party])
+      if @invoicing_party.update_attributes(params[:invoicing_party])
         format.html { redirect_to(@invoicing_party, :notice => 'Invoicing party was successfully updated.') }
         format.json  { head :ok }
       else

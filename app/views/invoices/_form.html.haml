@@ -1,39 +1,21 @@
-= form_for(@invoice) do |f|
+= simple_form_for @invoice do |f|
   - if @invoice.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@invoice.errors.count, 'error')} prohibited this user from being saved:"
       %ul
       - @invoice.errors.full_messages.each do |msg|
         %li= msg
-
-  .field
-    = f.label :customer
-    -#= f.select @customers[0], @customers[1]
-  .field
-    = f.label :number
-    = f.text_field :number
-  .field
-    = f.label :purchase_order
-    = f.text_field :purchase_order
-  .field
-    = f.label :currency
-    = f.text_field :currency
-  .field
-    = f.label :covering_text
-    = f.text_area :covering_text
-  .field
-    = f.label :invoicing_party_id
-    = f.text_field :invoicing_party_id
-  .field
-    = f.label :workflow_state
-    - @invoice.current_state.events.keys.each do |event|
-      = button_to event
-    -#= f.select :workflow_state, @invoice.current_state.events.keys
-  .field
-    = f.label :due_on
-    = f.text_field :due_on, :type => 'date'
-  - @invoice.invoice_items.each do |invoice_item|
-    = render :partial => 'invoice_item_form', :locals => {:invoice_item => invoice_item}
-
+  -#= f.association :customer, :label => t('customer'), :as => :select
+  = f.input :number, :label => t('number')
+  = f.input :purchase_order, :label => t('purchase_order')
+  = f.input :currency, :label => t('currency')
+  = f.input :covering_text, :label => t('covering_text'), :as => :text
+  -#= f.association current_user.invoicing_parties, :label => t('invoicing_party'), :as => :invoicing_party
+  -#= f.association :invoicing_party, :collection => current_user.invoicing_parties
+  = f.input :due_on, :label => t('due_on'), :as => :date
+  - f.simple_fields_for :invoice_items, @invoice.invoice_items[0] do |ii|
+    = ii.input :started_at, :label => t('started_at'), :as => 'datetime'
+    = ii.input :ended_at, :label => t('ended_at'), :as => 'datetime'
+    = ii.input :description, :label => t('description')
   .actions
-    = f.submit
+    = f.button :submit, t('submit')

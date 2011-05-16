@@ -20,6 +20,7 @@ gem 'jquery-rails', '>= 0.2.7'
 gem "compass"
 gem 'sass'
 gem "html5-boilerplate"
+gem "simple_form"
 
 group :test, :development do
   gem 'rspec'
@@ -45,4 +46,3 @@ end
 #   gem 'webrat'
 # end
 
-gem "irt"

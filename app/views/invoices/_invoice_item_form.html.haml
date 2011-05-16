@@ -1,2 +1,6 @@
-.invoice_item= invoice_item.attributes
+.invoice_items
+  - @invoice.invoice_items.each do |invoice_item|
+    = f.input :started_at, :label => t('started_at'), :type => :datetime
+    = f.input :ended_at, :label => t('ended_at'), :type => :datetime
+    = f.input :description, :label => t('description')
 

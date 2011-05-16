@@ -2,13 +2,25 @@ de:
   date:
     formats:
       numeric_month: "%m"
+
   time:
     formats:
       numeric: "%d.%m.%y %H:%M"
 
+  number:
+    format:
+      precision: 2
+      separator: ','
+      delimiter: ' '
+    currency:
+      unit: '€'
+      delimiter: ""
+      format: '%n %u'
+
   errors:
     messages:
       not_saved: 'Konnte nicht gespeichert werden'
+  submit: 'senden'
   edit: 'bearbeite'
   destroy: 'lösche'
   download_pdf: 'speichere pdf'
@@ -58,7 +70,17 @@ de:
   when: 'wann'
   paid: 'Bezahlt'
   hours: 'Stunden'
-  amount: 'Betrag'
-  vat_amount: 'Ust-Betrag'
-  gross_amount: 'Brutto-Betrag'
-
+  pdf:
+    invoice: 'Rechnung'
+    invoice_number: 'Rechnungsnummer: %{number}'
+    purchase_order: 'PO-Nummer: %{purchase_order}'
+    amount: 'Betrag'
+    vat_amount: 'Ust-Betrag'
+    gross_amount: 'Brutto-Betrag'
+    payment_until: 'Zahlbar bis spätestens %{due_on} (eingehend)'
+    tel_email_vatid: "Telefon: %{tel}\nE-Mail: %{email}\nUstID: %{vatid}"
+    bank_data: "Bank: %{name}\nBLZ: %{sort_code}\nKonto: %{account}"
+    hours_as_stated_in_service_statement: "%{hours} Stunden gemäss angehängter Leistungsaufstellung"
+    vat_to_be_added: 'zuzüglich der gesetzlichen Mehrwersteuer'
+    total_amount: 'Gesamtbetrag'
+    service_statement_for_invoice: 'Leistungsaufstellung für Rechnung "%{number}" vom %{print_date}'
