@@ -4,3 +4,4 @@ log/*.log
 tmp/
 config/google.yml
 config/mongoid.yml
+public/stylesheets/**.css

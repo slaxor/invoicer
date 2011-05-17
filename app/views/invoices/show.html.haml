@@ -4,27 +4,24 @@
   = link_to 'pdf', invoice_path(@invoice, :format => :pdf)
 
 %dl
-  %dt customer
+  %dt= t('customer')
   %dd= link_to @invoice.customer.name, customer_path(@invoice.customer)
-  %dt number
+  %dt= t('number')
   %dd= @invoice.number
-  %dt purchase_order
+  %dt= t('purchase_order')
   %dd= @invoice.purchase_order
-  %dt currency
+  %dt= t('currency')
   %dd= @invoice.currency
-  %dt covering_text
+  %dt= t('covering_text')
   %dd= @invoice.covering_text
-  %dt invoicing_party
+  %dt= t('invoicing_party')
   %dd= link_to @invoice.invoicing_party.name, invoicing_party_path(@invoice.invoicing_party)
-  %dt workflow_state
+  %dt= t('workflow_state')
   %dd= @invoice.current_state
-  %dt due_on
+  %dt= t('due_on')
   %dd= @invoice.due_on
-  %dt invoice_items
-  %dd= @invoice.invoice_items
-  -#%dt= render :partial => 'invoice_items'
-  %dt history
-  %dd
-    - @invoice.history.each do |entry|
-      .history
-        = "at #{entry['when']} #{entry['triggering_event']} changed from #{entry['from']} to #{entry['to']}"
+  %dt= t('invoice_items')
+  %dd= render :partial => 'invoice_items'
+  %dt= t('history')
+  %dd= render :partial => 'history'
+

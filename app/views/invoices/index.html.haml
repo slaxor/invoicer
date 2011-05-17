@@ -1,7 +1,7 @@
 %h1 Invoices
 %p= link_to 'New invoice', new_invoice_path
 - @invoices.each do |invoice|
-  %table
+  %table{:class => "'invoice #{invoice.current_state}'"}
     %thead
       %tr
         %th= t('customer')

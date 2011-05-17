@@ -7,8 +7,9 @@
       %th.pauses= t('pauses')
       %th.pricing_strategy= t('pricing_strategy')
       %th.vat_rate= t('vat_rate')
+      %th.vat_rate= t('price')
   %tbody
-    - invoice.invoice_items.each do |invoice_item|
+    - (invoice || @invoice).invoice_items.each do |invoice_item|
       %tr{ :class => cycle(:odd, :even) }
         %td= invoice_item.description
         %td= l(invoice_item.started_at, :format => :numeric)
@@ -16,4 +17,5 @@
         %td= invoice_item.pause_times
         %td= t(invoice_item.pricing_strategy)
         %td= invoice_item.vat_rate
+        %td= number_to_currency(invoice_item.price)
 

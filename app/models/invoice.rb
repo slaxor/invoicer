@@ -18,6 +18,8 @@ class Invoice
   attr_accessible :customer_id, :number, :purchase_order, :currency, :covering_text, :invoicing_party_id, :workflow_state, :due_on,
     :invoice_items, :history
 
+  default_scope desc(:due_on)
+
   include Workflow
 
   workflow do

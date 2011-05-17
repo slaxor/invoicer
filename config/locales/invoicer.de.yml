@@ -20,6 +20,8 @@ de:
   errors:
     messages:
       not_saved: 'Konnte nicht gespeichert werden'
+  back: 'zurück'
+  show: 'anzeigen'
   submit: 'senden'
   edit: 'bearbeite'
   destroy: 'lösche'
