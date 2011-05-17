@@ -1,11 +1,11 @@
 %table
   %thead
-    %th.history_when= t('when')
-    %th.history_event= t('event')
-    %th.history_from= t('from')
-    %th.history_to= t('to')
+    %th.history_when= t('invoicer.when')
+    %th.history_event= t('invoicer.event')
+    %th.history_from= t('invoicer.from')
+    %th.history_to= t('invoicer.to')
   %tbody
-    - (invoice || @invoice).history.each do |history|
+    - (defined?(invoice) ? invoice : @invoice).history.each do |history|
       %tr
         %td= l(history['when'], :format => :numeric) rescue 'INVALID :('
         %td= t(history['triggering_event'])

@@ -1,33 +1,33 @@
 %h1= @invoicing_party.name
 %p
-  = link_to t('back'), invoicing_parties_path
-  = link_to t('edit'), edit_invoicing_party_path(@invoicing_party)
+  = link_to t('invoicer.back'), invoicing_parties_path
+  = link_to t('invoicer.edit'), edit_invoicing_party_path(@invoicing_party)
 
 %dl
-  %dt co_line
+  %dt= t('invoicer.co_line')
   %dd= @invoicing_party.co_line
-  %dt street
+  %dt= t('invoicer.street')
   %dd= @invoicing_party.street
-  %dt post_code
+  %dt= t('invoicer.post_code')
   %dd= @invoicing_party.post_code
-  %dt city
+  %dt= t('invoicer.city')
   %dd= @invoicing_party.city
-  %dt country
+  %dt= t('invoicer.country')
   %dd= @invoicing_party.country
-  %dt vatid
+  %dt= t('invoicer.vatid')
   %dd= @invoicing_party.vatid
-  %dt taxnumber
+  %dt= t('invoicer.taxnumber')
   %dd= @invoicing_party.taxnumber
-  %dt currency
+  %dt= t('invoicer.currency')
   %dd= @invoicing_party.currency
-  %dt bank name
+  %dt= t('invoicer.bank name')
   %dd= @invoicing_party.bank_name
-  %dt bank_account_number
+  %dt= t('invoicer.bank_account_number')
   %dd= @invoicing_party.bank_account_number
-  %dt bank_sort_code
+  %dt= t('invoicer.bank_sort_code')
   %dd= @invoicing_party.bank_sort_code
-  %dt telephone
+  %dt= t('invoicer.telephone')
   %dd= @invoicing_party.telephone
-  %dt email
+  %dt= t('invoicer.email')
   %dd= @invoicing_party.email
 

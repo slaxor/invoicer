@@ -11,7 +11,7 @@ class Invoice
   field :currency, :type => String, :default => '€'
   field :covering_text, :type => String
   field :workflow_state, :type => String, :default => 'started'
-  field :due_on, :type => Date
+  field :due_on, :type => Date, :default => 4.weeks.from_now.to_date
   field :history, :type => Array, :default => []
 
 
@@ -19,6 +19,16 @@ class Invoice
     :invoice_items, :history
 
   default_scope desc(:due_on)
+
+  validates_uniqueness_of :number, :scope => :invoicing_party_id
+  validate :invoicing_party_id do |i|
+    i.invoicing_party_id.is_a?(BSON::ObjectId)
+  end
+
+  validate :customer_id do
+
+    self.is_a?(BSON::ObjectId)
+  end
 
   include Workflow
 

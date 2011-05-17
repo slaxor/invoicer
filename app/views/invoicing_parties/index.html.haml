@@ -4,22 +4,22 @@
 %table
   %thead
     %tr
-      %th name
-      %th user
-      %th co_line
-      %th street
-      %th post_code
-      %th city
-      %th country
-      %th vatid
-      %th taxnumber
-      %th bank name
-      %th bank_account_number
-      %th bank_sort_code
-      %th telephone
-      %th email
-      %th invoices
-      %th actions
+      %th= t('invoicer.name')
+      %th= t('invoicer.user')
+      %th= t('invoicer.co_line')
+      %th= t('invoicer.street')
+      %th= t('invoicer.post_code')
+      %th= t('invoicer.city')
+      %th= t('invoicer.country')
+      %th= t('invoicer.vatid')
+      %th= t('invoicer.taxnumber')
+      %th= t('invoicer.bank name')
+      %th= t('invoicer.bank_account_number')
+      %th= t('invoicer.bank_sort_code')
+      %th= t('invoicer.telephone')
+      %th= t('invoicer.email')
+      %th= t('invoicer.invoices')
+      %th= t('invoicer.actions')
 
   %tbody
     - @invoicing_parties.each do |invoicing_party|
@@ -44,6 +44,6 @@
               %li.invoice= link_to invoice.number, invoice_path(invoice)
             %li.invoice.new= link_to 'new invoice', new_invoice_path
         %td.action
-          =link_to t('show'), invoicing_party_path(invoicing_party)
-          =link_to t('edit'), edit_invoicing_party_path(invoicing_party)
-          =link_to t('destroy'), invoicing_party_path(invoicing_party, :method => :delete)
+          =link_to t('invoicer.show'), invoicing_party_path(invoicing_party)
+          =link_to t('invoicer.edit'), edit_invoicing_party_path(invoicing_party)
+          =link_to t('invoicer.destroy'), invoicing_party_path(invoicing_party, :method => :delete)

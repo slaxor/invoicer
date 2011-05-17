@@ -5,17 +5,16 @@
       %ul
       - @invoice.errors.full_messages.each do |msg|
         %li= msg
-  -#= f.association :customer, :label => t('customer'), :as => :select
-  = f.input :number, :label => t('number')
-  = f.input :purchase_order, :label => t('purchase_order')
-  = f.input :currency, :label => t('currency')
-  = f.input :covering_text, :label => t('covering_text'), :as => :text
-  -#= f.association current_user.invoicing_parties, :label => t('invoicing_party'), :as => :invoicing_party
-  -#= f.association :invoicing_party, :collection => current_user.invoicing_parties
-  = f.input :due_on, :label => t('due_on'), :as => :date
+  = f.select :invoicing_party_id, current_user.invoicing_parties.map{|ip| [ip.name, ip.id]}, :label => t('invoicer.invoicing_party')
+  = f.select :customer_id, current_user.customers.map{|c| [c.name, c.id]}, :label => t('invoicer.customer')
+  = f.input :number, :label => t('invoicer.number')
+  = f.input :purchase_order, :label => t('invoicer.purchase_order')
+  = f.input :currency, :label => t('invoicer.currency')
+  = f.input :covering_text, :label => t('invoicer.covering_text'), :as => :text
+  = f.input :due_on, :label => t('invoicer.due_on'), :input_html => {:type => :date}
   - f.simple_fields_for :invoice_items, @invoice.invoice_items[0] do |ii|
-    = ii.input :started_at, :label => t('started_at'), :as => 'datetime'
-    = ii.input :ended_at, :label => t('ended_at'), :as => 'datetime'
-    = ii.input :description, :label => t('description')
+    = ii.input :started_at, :label => t('sinvoicer.tarted_at'), :as => 'datetime'
+    = ii.input :ended_at, :label => t('invoicer.ended_at'), :as => 'datetime'
+    = ii.input :description, :label => t('invoicer.description')
   .actions
-    = f.button :submit, t('submit')
+    = f.button :submit, t('invoicer.submit')

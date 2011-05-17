@@ -1,19 +1,19 @@
 %h1 Customers
-%p= link_to t('.new_customer'), new_customer_path
+%p= link_to t('invoicer..new_customer'), new_customer_path
 
 %table
   %thead
     %tr
-      %th name
-      %th number
-      %th email
-      %th telephone
-      %th street
-      %th post_code
-      %th city
-      %th country
-      %th invoices
-      %th actions
+      %th= t('invoicer.name')
+      %th= t('invoicer.number')
+      %th= t('invoicer.email')
+      %th= t('invoicer.telephone')
+      %th= t('invoicer.street')
+      %th= t('invoicer.post_code')
+      %th= t('invoicer.city')
+      %th= t('invoicer.country')
+      %th= t('invoicer.invoices')
+      %th= t('invoicer.actions')
 
   %tbody
     - @customers.each do |customer|
@@ -30,8 +30,8 @@
           %ul
             - customer.invoices.each do |invoice|
               %li.invoice= link_to invoice.number, invoice_path(invoice)
-            %li.invoice.new= link_to 'new invoice', new_invoice_path
+            %li.invoice.new= link_to t('invoicer.new_invoice'), new_invoice_path
         %td.action
-          %li.customer.edit= link_to t('edit') , edit_customer_path(customer)
-          %li.customer.destroy= link_to t('destroy'), customer, {:confirm => 'Are you sure?', :method => :delete}, {}
-.customer.new= link_to 'new customer', new_customer_path
+          %li.customer.edit= link_to t('invoicer.edit') , edit_customer_path(customer)
+          %li.customer.destroy= link_to t('invoicer.destroy'), customer, {:confirm => t('invoicer.are_you_sure?'), :method => :delete}, {}
+.customer.new= link_to  t('invoicer.new_customer'), new_customer_path

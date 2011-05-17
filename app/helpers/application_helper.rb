@@ -4,9 +4,9 @@ module ApplicationHelper
   end
 
   def workflow_tag(invoice)
-    haml_tag("div.workflow_state_#{invoice.current_state}", "#{t(invoice.current_state)}")
+    haml_tag("div.workflow_state_#{invoice.current_state}", "#{t('invoicer.' + invoice.current_state.to_s)}")
     invoice.current_state.events.each do |k,v|
-      haml_tag("button.event_#{k}", "#{t(k)}")
+      haml_tag("button.event_#{k}", "#{t('invoicer.' + k.to_s)}")
     end
   end
 end

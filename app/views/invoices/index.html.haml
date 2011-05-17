@@ -4,15 +4,15 @@
   %table{:class => "'invoice #{invoice.current_state}'"}
     %thead
       %tr
-        %th= t('customer')
-        %th= t('invoicing_party')
-        %th= t('number')
-        %th= t('purchase_order')
-        %th= t('currency')
-        %th= t('covering_text')
-        %th= t('workflow_state')
-        %th= t('due_on')
-        %th= t('actions')
+        %th= t('invoicer.customer')
+        %th= t('invoicer.invoicing_party')
+        %th= t('invoicer.number')
+        %th= t('invoicer.purchase_order')
+        %th= t('invoicer.currency')
+        %th= t('invoicer.covering_text')
+        %th= t('invoicer.workflow_state')
+        %th= t('invoicer.due_on')
+        %th= t('invoicer.actions')
     %tbody
     %tr{ :class => invoice.current_state, :id => "invoice_#{invoice.id}" }
       %td= link_to(invoice.customer.name, customer_path(invoice.customer))
@@ -25,9 +25,9 @@
         - workflow_tag(invoice)
       %td= l(invoice.due_on.to_date)
       %td.action
-        = link_to t('edit'), edit_invoice_path(invoice)
-        = link_to t('destroy'), invoice_path(invoice), :method => :delete
-        = link_to t('download_pdf'), invoice_path(invoice, :format => :pdf)
+        = link_to t('invoicer.edit'), edit_invoice_path(invoice)
+        = link_to t('invoicer.destroy'), invoice_path(invoice), :method => :delete
+        = link_to t('invoicer.download_pdf'), invoice_path(invoice, :format => :pdf)
     %tr{:class => "#{invoice.current_state} invoice_items"}
       %td{:colspan => '100%'}
         =render('invoice_items', :invoice => invoice) unless invoice.invoice_items.empty?

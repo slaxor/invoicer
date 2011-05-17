@@ -2,17 +2,28 @@
 @import "compass/css3/border-radius"
 @import "compass/css3/images"
 $blueprint-grid-columns: 12
+@import "blueprint"
 @import "blueprint/grid"
 @import "blueprint/buttons"
 
+$blueprint-font-family: "Gentium"
 +font-face("Gentium", font-files("/fonts/ttf-sil-gentium/GenR102.ttf", truetype))
-+font-face("Gentium Bold", font-files("/fonts/ttf-sil-gentium/GenAR102.ttf", truetype))
-+font-face("Gentium Italic", font-files("/fonts/ttf-sil-gentium/GenI102.ttf", truetype))
-+font-face("Gentium Bold Italic", font-files("/fonts/ttf-sil-gentium/GenAI102.ttf", truetype))
++font-face("Gentium_Bold", font-files("/fonts/ttf-sil-gentium/GenAR102.ttf", truetype))
++font-face("Gentium_Italic", font-files("/fonts/ttf-sil-gentium/GenI102.ttf", truetype))
++font-face("Gentium_Bold_Italic", font-files("/fonts/ttf-sil-gentium/GenAI102.ttf", truetype))
 
 body
   font-family: "Gentium"
   +background-image(linear-gradient(left top, #efefff, #efefdd))
+
+textarea
+  font-family: "Gentium"
+  font-weight: bold
+
+dt
+  display: inline
+dd
+  display: inline
 
 table
   tr
@@ -127,7 +138,7 @@ th
   background-color: #b0b0b0
 
 .issued
-  background-color: #ffffa0
+  background-color: #a0a0ff
 
 .overdue
   background-color: #ffa0a0

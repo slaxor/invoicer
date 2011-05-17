@@ -2,7 +2,6 @@
 %p
   = link_to 'edit', edit_invoice_path(@invoice)
   = link_to 'pdf', invoice_path(@invoice, :format => :pdf)
-
 %dl
   %dt= t('customer')
   %dd= link_to @invoice.customer.name, customer_path(@invoice.customer)
@@ -16,12 +15,12 @@
   %dd= @invoice.covering_text
   %dt= t('invoicing_party')
   %dd= link_to @invoice.invoicing_party.name, invoicing_party_path(@invoice.invoicing_party)
-  %dt= t('workflow_state')
+  %dt= t('invoicer.workflow_state')
   %dd= @invoice.current_state
-  %dt= t('due_on')
+  %dt= t('invoicer.due_on')
   %dd= @invoice.due_on
-  %dt= t('invoice_items')
+  %dt= t('invoicer.invoice_items')
   %dd= render :partial => 'invoice_items'
-  %dt= t('history')
+  %dt= t('invoicer.history')
   %dd= render :partial => 'history'
 

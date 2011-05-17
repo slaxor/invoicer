@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all
+    @invoices = current_user.invoices
     respond_to do |format|
       format.html
       format.json  { render :json => @invoices }
@@ -43,6 +43,7 @@ class InvoicesController < ApplicationController
   end
 
   def create
+    debugger
     @invoice = Invoice.new(params[:invoice])
 
     respond_to do |format|
