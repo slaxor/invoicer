@@ -8,7 +8,6 @@ class InvoiceItem
   field :ended_at, :type => DateTime
   field :price, :type => Float #wir werden die rundungfehler sicher überleben und…
   field :pricing_strategy, :type => String, :default => 'hourly'
-  field :pricing_unit, :type => String
   field :vat_rate, :type => Float # …BigDecimal speichert als String was ich irgendwie hässlich find
 
 
