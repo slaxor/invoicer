@@ -18,9 +18,12 @@ class Invoice
   attr_accessible :customer_id, :number, :purchase_order, :currency, :covering_text, :invoicing_party_id, :workflow_state, :due_on,
     :invoice_items, :history
 
-  default_scope desc(:due_on)
+  default_scope desc(:due_on, :number)
 
   validates_uniqueness_of :number, :scope => :invoicing_party_id
+  validates_presence_of :invoicing_party
+  validates_presence_of :customer
+
   validate :invoicing_party_id do |i|
     i.invoicing_party_id.is_a?(BSON::ObjectId)
   end
