@@ -12,9 +12,6 @@
   = f.input :currency, :label => t('invoicer.currency')
   = f.input :covering_text, :label => t('invoicer.covering_text'), :as => :text
   = f.input :due_on, :label => t('invoicer.due_on'), :input_html => {:type => :date}
-  - f.simple_fields_for :invoice_items, @invoice.invoice_items[0] do |ii|
-    = ii.input :started_at, :label => t('sinvoicer.tarted_at'), :as => 'datetime'
-    = ii.input :ended_at, :label => t('invoicer.ended_at'), :as => 'datetime'
-    = ii.input :description, :label => t('invoicer.description')
+  = render :partial => 'invoice_item_form'
   .actions
     = f.button :submit, t('invoicer.submit')

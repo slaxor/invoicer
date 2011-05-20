@@ -69,6 +69,9 @@ de:
     when: 'wann'
     paid: 'Bezahlt'
     hours: 'Stunden'
+    amount: 'Betrag'
+    vat_amount: 'Ust-Betrag'
+    gross_amount: 'Brutto-Betrag'
     pdf:
       invoice: 'Rechnung'
       invoice_number: 'Rechnungsnummer: %{number}'

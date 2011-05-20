@@ -12,6 +12,7 @@
         %th= t('invoicer.covering_text')
         %th= t('invoicer.workflow_state')
         %th= t('invoicer.due_on')
+        %th= t('invoicer.amount')
         %th= t('invoicer.actions')
     %tbody
     %tr{ :class => invoice.current_state, :id => "invoice_#{invoice.id}" }
@@ -24,6 +25,14 @@
       %td
         - workflow_tag(invoice)
       %td= l(invoice.due_on.to_date)
+      %td
+        %dl
+          %dt= t('invoicer.amount')
+          %dd= number_to_currency(invoice.amount, :unit => invoice.currency)
+          %dt= t('invoicer.vat_amount')
+          %dd= number_to_currency(invoice.vat_amount, :unit => invoice.currency)
+          %dt= t('invoicer.gross_amount')
+          %dd= number_to_currency(invoice.gross_amount, :unit => invoice.currency)
       %td.action
         = link_to t('invoicer.edit'), edit_invoice_path(invoice)
         = link_to t('invoicer.destroy'), invoice_path(invoice), :method => :delete

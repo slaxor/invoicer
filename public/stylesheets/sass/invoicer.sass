@@ -5,6 +5,8 @@ $blueprint-grid-columns: 12
 @import "blueprint"
 @import "blueprint/grid"
 @import "blueprint/buttons"
+$invoice_items_color: rgba(243,243,255,0.9)
+$pauses_color: rgba(243,255,243,0.9)
 
 $blueprint-font-family: "Gentium"
 +font-face("Gentium", font-files("/fonts/ttf-sil-gentium/GenR102.ttf", truetype))
@@ -13,17 +15,17 @@ $blueprint-font-family: "Gentium"
 +font-face("Gentium_Bold_Italic", font-files("/fonts/ttf-sil-gentium/GenAI102.ttf", truetype))
 
 body
-  font-family: "Gentium"
   +background-image(linear-gradient(left top, #efefff, #efefdd))
-
+*
+  font-family: "Gentium" !important
 textarea
-  font-family: "Gentium"
+  font-family: "Gentium_Bold"
   font-weight: bold
 
 dt
-  display: inline
+  display: block
 dd
-  display: inline
+  display: block
 
 table
   tr
@@ -36,6 +38,10 @@ table
       padding: 2px 14px
       border: 1px dotted #404040
 
+label
+  display: inline-block
+  margin-right: 1em
+
 fieldset
   border: 0
 
@@ -43,11 +49,8 @@ strong
   font-style: italic
   font-variant: small-caps
   font-weight: lighter
-
-label
-  color: rgba(60,60,60,0.7)
-  display: block
-
+input
+  font-size: 95%
 .window
   border: 1px solid #a0a0a0
   display: inline-table
@@ -87,12 +90,14 @@ th
   background-color: #c0ffc0
 
 .odd
-  background-color: #d0d0d0
 
 //invoice index
-.invoice_items table
-  width: 100%
-  border: 0
+.invoice_items div
+  background-color: $invoice_items_color
+  margin-left: 2em
+.pauses div
+  background-color: $pauses_color
+  margin-left: 4em
 
 .details-list
   display: none
