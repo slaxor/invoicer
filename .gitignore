@@ -5,3 +5,4 @@ tmp/
 config/google.yml
 config/mongoid.yml
 public/stylesheets/**.css
+public/assets/

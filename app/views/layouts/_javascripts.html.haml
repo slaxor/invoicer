@@ -1,6 +1,6 @@
 
-= javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery-extensions', 'rails', 'plugins', 'application'
-
+-['jquery.min', 'jquery-ui.min', 'jquery-extensions', 'rails', 'plugins', 'backbone', 'application'].each do |js|
+  = javascript_include_tag js
 -# Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb
 /[if lt IE 7 ]
   = javascript_include_tag 'dd_belatedpng.js'
