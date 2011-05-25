@@ -16,33 +16,33 @@ class InvoiceItem
   accepts_nested_attributes_for :pauses, :allow_destroy => true
 
   def hours
-    (ended_at - started_at) / 3600.0 - pause_length
+    (self.ended_at - self.started_at) / 3600.0 - self.pause_duration
   end
 
   def amount
     case pricing_strategy
     when 'fixed'
-      price
+      self.price
     when 'hourly'
-      price * hours
+      self.price * self.hours
     else
       raise 'ImplementationWorkToDo'
     end
   end
 
   def vat_amount
-    amount * vat_rate
+    self.amount * self.vat_rate
   end
 
   def gross_amount
-    amount + vat_amount
+    self.amount + self.vat_amount
   end
 
   def pause_times
-    pauses.map(&:to_s).join(', ')
+    self.pauses.map(&:to_s).join(', ')
   end
 
-  def pause_length
-    pauses.sum(&:length)
+  def pause_duration
+    self.pauses.to_a.sum(&:duration)
   end
 end

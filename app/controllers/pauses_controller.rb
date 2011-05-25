@@ -1,0 +1,2 @@
+class PausesController < ApplicationController
+end

@@ -117,19 +117,19 @@ class Invoice
   end
 
   def hours
-    invoice_items.sum(&:hours)
+    invoice_items.to_a.sum(&:hours)
   end
 
   def amount
-    invoice_items.sum(&:amount)
+    invoice_items.to_a.sum(&:amount)
   end
 
   def vat_amount
-    invoice_items.sum(&:vat_amount)
+    invoice_items.to_a.sum(&:vat_amount)
   end
 
   def gross_amount
-    invoice_items.sum(&:gross_amount)
+    invoice_items.to_a.sum(&:gross_amount)
   end
 
   def printed_at

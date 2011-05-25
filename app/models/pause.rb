@@ -8,10 +8,10 @@ class Pause
   field :ended_at, :type => DateTime
 
   def to_s
-    "#{started_at.to_s(:time)} - #{ended_at.to_s(:time)}"
+    "#{I18n.l(self.started_at, :format => :time )} - #{I18n.l(self.ended_at, :format => :time)}"
   end
 
-  def length
-    (ended_at - started_at) / 3600
+  def duration
+    (self.ended_at.to_f - self.started_at.to_f) / 3600
   end
 end

@@ -1,7 +1,6 @@
-# -*- encoding : utf-8 -*-
-class InvoicesController < ApplicationController
+class InvoiceItemsController < ApplicationController
   def index
-    @invoices = current_user.invoices
+    @invoice_items =
     respond_to do |format|
       format.html
       format.json  { render :json => @invoices }
@@ -86,5 +85,10 @@ class InvoicesController < ApplicationController
       format.html { redirect_to(invoices_url) }
       format.json  { head :ok }
     end
+  end
+  private
+  def get_invoice
+    @invoice = Invoice.find(params[:invoice_id])
+    head :not_allowed unless current_user.
   end
 end
