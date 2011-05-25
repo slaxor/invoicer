@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails'
+gem 'rails', '>=3.1.0.rc1'
+gem 'coffee-script'
+gem 'uglifier'
+gem 'jquery-rails'
+
 gem 'mongoid'
 gem 'bson_ext'
 gem 'devise' # users and auth
@@ -16,7 +20,6 @@ gem 'rails3-generators'
 gem 'prawn'
 gem 'prawnto'
 gem 'json'
-gem 'jquery-rails', '>= 0.2.7'
 gem "compass"
 gem 'sass'
 gem "html5-boilerplate"
