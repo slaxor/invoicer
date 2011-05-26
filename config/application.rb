@@ -26,23 +26,27 @@ module Invoicer
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
+    # Configure the default encoding used in templates for Ruby 1.9.
+    config.encoding = "utf-8"
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Berlin'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w()
-
-    # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
-    config.time_zone = 'Berlin'
+    config.action_view.javascript_expansions[:backbone_stuff] = %w(underscore backbone models/* collections/* views/* backbone_app)
+    config.assets.enabled = true
+    #config.serve_static_assets = false
+    config.assets.js_compressor  = :uglifier
+    config.assets.css_compressor = :scss
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     config.mongoid.logger = Logger.new($stdout, :info) if Rails.env.development?
   end
 end
+
