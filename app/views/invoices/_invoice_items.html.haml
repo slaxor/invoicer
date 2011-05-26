@@ -8,6 +8,7 @@
       %th.pricing_strategy= t('invoicer.pricing_strategy')
       %th.vat_rate= t('invoicer.vat_rate')
       %th.vat_rate= t('invoicer.price')
+      %th.amount= t('invoicer.amount')
   %tbody
     - (defined?(invoice) ? invoice : @invoice).invoice_items.each do |invoice_item|
       %tr{ :class => cycle(:odd, :even) }
@@ -18,4 +19,5 @@
         %td= t(invoice_item.pricing_strategy)
         %td= invoice_item.vat_rate
         %td= number_to_currency(invoice_item.price)
+        %td= invoice_item.amount
 
