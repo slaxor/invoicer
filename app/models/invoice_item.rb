@@ -16,7 +16,7 @@ class InvoiceItem
   accepts_nested_attributes_for :pauses, :allow_destroy => true
 
   def hours
-    (self.ended_at - self.started_at) / 3600.0 - self.pause_duration
+    (self.ended_at.to_f - self.started_at.to_f) / 3600.0 - self.pause_duration
   end
 
   def amount
