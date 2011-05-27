@@ -14,6 +14,11 @@ Invoicer::Application.routes.draw do
   resources :invoices do
     member do
       put :handle_workflow_event
+      resource :invoice_items do
+        member do
+          resource :pauses
+        end
+      end
     end
   end
   resources :invoicing_parties

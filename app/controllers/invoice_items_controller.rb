@@ -89,6 +89,6 @@ class InvoiceItemsController < ApplicationController
   private
   def get_invoice
     @invoice = Invoice.find(params[:invoice_id])
-    head :not_allowed unless current_user.
+    head :not_allowed unless false #TODO check if current_user is allowed
   end
 end

@@ -39,7 +39,6 @@ module Invoicer
     config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:backbone_stuff] = %w(underscore backbone models/* collections/* views/* backbone_app)
     config.assets.enabled = true
     #config.serve_static_assets = false
     config.assets.js_compressor  = :uglifier
@@ -49,4 +48,5 @@ module Invoicer
     config.mongoid.logger = Logger.new($stdout, :info) if Rails.env.development?
   end
 end
+
 

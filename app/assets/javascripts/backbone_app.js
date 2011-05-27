@@ -1,8 +1,4 @@
-// <%= 'Rails.root' %>
-//=require 'lib/jquery.js'
-//=require 'lib/underscore.js'
-//=require 'lib/backbone.js'
-var User = Backbone.Model.extend({
+var InvoiceItem = Backbone.Model.extend({
 });
 
 var InvoicingParty = Backbone.Model.extend({
@@ -23,9 +19,6 @@ var Invoice = Backbone.Model.extend({
       }
     }
   }
-});
-
-var InvoiceItem = Backbone.Model.extend({
 });
 
 var InvoiceCollection = Backbone.Collection.extend({
@@ -51,35 +44,6 @@ var InvoiceItemCollection = Backbone.Collection.extend({
   url: function() {
     return location + '/customers/' + invoices.customer_id + '/invoices/' + this.invoice_id + '/invoice_items';
   }
-});
-
-var BaseView = Backbone.View.extend({
-  events: {
-    'click .details': 'handle_details',
-    'click .invoices': 'handle_invoices',
-    'click .edit': 'handle_edit',
-    'click .delete': 'handle_delete'
-  },
-
-  initialize: function () {
-    console.log('base called');
-    this.model.view = this;
-    this.template = TemplateResolver.get(this.template);
-  },
-  render: function () {
-    $(this.el).append(this.template(this.model.toJSON()) )
-    return this;
-  },
-
-  handle_details: function () {
-    this.$('.details-list').toggleClass('show');
-  },
-  handle_edit: function (e) {
-    new FormView({model: this.model, el: this.form_element, template: this.template + '_form'}).render();
-  },
-  handle_new: function (e) {
-    new FormView({model: this.model, el: this.form_element, template: this.template + '_form'}).render();
-  },
 });
 
 var InvoicesView = Backbone.View.extend({
@@ -244,6 +208,35 @@ var InvoiceItemsView = Backbone.View.extend({
   handle_delete: function(e) {
     console.log(e);
   }
+});
+
+var BaseView = Backbone.View.extend({
+  events: {
+    'click .details': 'handle_details',
+    'click .invoices': 'handle_invoices',
+    'click .edit': 'handle_edit',
+    'click .delete': 'handle_delete'
+  },
+
+  initialize: function () {
+    console.log('base called');
+    this.model.view = this;
+    this.template = TemplateResolver.get(this.template);
+  },
+  render: function () {
+    $(this.el).append(this.template(this.model.toJSON()) )
+    return this;
+  },
+
+  handle_details: function () {
+    this.$('.details-list').toggleClass('show');
+  },
+  handle_edit: function (e) {
+    new FormView({model: this.model, el: this.form_element, template: this.template + '_form'}).render();
+  },
+  handle_new: function (e) {
+    new FormView({model: this.model, el: this.form_element, template: this.template + '_form'}).render();
+  },
 });
 
 var FormView = Backbone.View.extend({
