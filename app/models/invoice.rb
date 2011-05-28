@@ -42,11 +42,6 @@ class Invoice
     end
 
     state :completed do
-      event :print, :transitions_to => :printed
-      event :cancel, :transitions_to => :cancelled
-    end
-
-    state :printed do
       event :issue, :transitions_to => :issued
       event :cancel, :transitions_to => :cancelled
     end
