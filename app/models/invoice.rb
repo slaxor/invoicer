@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Invoice
   include Mongoid::Document
+  include Mongoid::Paranoia
+  include Mongoid::Versioning
+
+  max_versions 15
 
   referenced_in :customer
   referenced_in :invoicing_party

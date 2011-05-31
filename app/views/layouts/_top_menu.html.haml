@@ -1,8 +1,9 @@
-%ul.top_menu
-  %li.menu_item= link_to t('invoicer.user_settings'), edit_user_path(current_user)
-  %li.menu_item= link_to t('invoicer.customers'), customers_path
-  %li.menu_item= link_to t('invoicer.invoicing_parties'), invoicing_parties_path
-  %li.menu_item= link_to t('invoicer.invoices'), invoices_path
-  %li.menu_item= link_to t('invoicer.logout', :who => current_user.email), destroy_user_session_path
+- if user_signed_in?
+  %ul.top_menu
+    %li.menu_item= link_to t('invoicer.user_settings'), edit_user_path(current_user)
+    %li.menu_item= link_to t('invoicer.customers'), customers_path
+    %li.menu_item= link_to t('invoicer.invoicing_parties'), invoicing_parties_path
+    %li.menu_item= link_to t('invoicer.invoices'), invoices_path
+    %li.menu_item= link_to t('invoicer.logout', :who => current_user.email), destroy_user_session_path
 
 

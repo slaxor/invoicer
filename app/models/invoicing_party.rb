@@ -18,8 +18,11 @@ class InvoicingParty
   field :bank_name
   field :bank_account_number
   field :bank_sort_code
+  field :invoice_template
   #field :user_id, ObjectId, :required =>  true
 
   attr_accessible :name, :email, :telephone, :co_line, :street, :post_code, :city, :country, :vatid, :taxnumber, \
-    :currency, :bank_name,:bank_account_number, :bank_sort_code
+    :currency, :bank_name,:bank_account_number, :bank_sort_code, :invoice_template
+
+  mount_uploader :invoice_template, InvoiceTemplateUploader
 end

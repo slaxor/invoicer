@@ -1,10 +1,9 @@
 # encoding: utf-8
-
-class AvatarUploader < CarrierWave::Uploader::Base
+class InvoiceTemplateUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or ImageScience support:
-  include CarrierWave::RMagick
-  #include CarrierWave::ImageScience
+  # include CarrierWave::RMagick
+  # include CarrierWave::ImageScience
 
   # Choose what kind of storage to use for this uploader:
   #storage :grid_fs
@@ -23,7 +22,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :resize_to_limit => [100, 100]
+  # process :scale => [200, 300]
   #
   # def scale(width, height)
   #   # do something

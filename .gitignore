@@ -7,3 +7,5 @@ config/mongoid.yml
 public/stylesheets/**.css
 public/assets/
 public/javascripts/
+public/uploads/
+.sass-cache/

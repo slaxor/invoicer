@@ -1,22 +1,23 @@
-%h1 Invoices
+%h1= t('invoicer.invoice')
 %p
-  = link_to 'edit', edit_invoice_path(@invoice)
-  = link_to 'pdf', invoice_path(@invoice, :format => :pdf)
+  = link_to t('invoicer.edit'), edit_invoice_path(@invoice)
+  = link_to t('invoicer.download_pdf'), invoice_path(@invoice, :format => :pdf)
 %dl
-  %dt= t('customer')
+  %dt= t('invoicer.customer')
   %dd= link_to @invoice.customer.name, customer_path(@invoice.customer)
-  %dt= t('number')
+  %dt= t('invoicer.number')
   %dd= @invoice.number
-  %dt= t('purchase_order')
+  %dt= t('invoicer.purchase_order')
   %dd= @invoice.purchase_order
-  %dt= t('currency')
+  %dt= t('invoicer.currency')
   %dd= @invoice.currency
-  %dt= t('covering_text')
+  %dt= t('invoicer.covering_text')
   %dd= @invoice.covering_text
-  %dt= t('invoicing_party')
+  %dt= t('invoicer.invoicing_party')
   %dd= link_to @invoice.invoicing_party.name, invoicing_party_path(@invoice.invoicing_party)
   %dt= t('invoicer.workflow_state')
-  %dd= @invoice.current_state
+  %dd
+    - workflow_tag(@invoice)
   %dt= t('invoicer.due_on')
   %dd= @invoice.due_on
   %dt= t('invoicer.invoice_items')

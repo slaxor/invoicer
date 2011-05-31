@@ -21,7 +21,8 @@ class InvoicesController < ApplicationController
         @invoice.update_attribute(:printed_at, Time.now) unless @invoice.printed_at
         prawnto(
           :filename => "#{filename}.pdf",
-          :prawn => {:page_size => 'A4', :left_margin => 80, :right_margin => 50, :bottom_margin => 10 }
+          :prawn => {:page_size => 'A4', :left_margin => 80, :right_margin => 50, :bottom_margin => 10}
+          #:template => @invoice.pdf_template}
         )
       end
     end

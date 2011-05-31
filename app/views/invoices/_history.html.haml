@@ -8,7 +8,7 @@
     - (defined?(invoice) ? invoice : @invoice).history.each do |history|
       %tr
         %td= l(history['when'], :format => :numeric) rescue 'INVALID :('
-        %td= t(history['triggering_event'])
-        %td= t(history['from'])
-        %td= t(history['to'])
+        %td= t("invoicer.workflow.events.#{history['triggering_event']}")
+        %td= t("invoicer.workflow.states.#{history['from']}")
+        %td= t("invoicer.workflow.states.#{history['to']}")
 

@@ -12,6 +12,6 @@
   = f.input :currency, :label => t('invoicer.currency')
   = f.input :covering_text, :label => t('invoicer.covering_text'), :as => :text
   = f.input :due_on, :label => t('invoicer.due_on'), :input_html => {:type => :date}
-  = render :partial => 'invoice_item_form'
+  = render :partial => 'invoice_item_form', :locals => {:f => f}
   .actions
     = f.button :submit, t('invoicer.submit')

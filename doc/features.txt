@@ -1,4 +1,6 @@
 - in order to easily make my tax-statement as user i want to summarize the amounts of arbitrary invoices
 - in order to grease the issueing as user i want to be able to send invoices via email
 - in order to keep the amounts to myself as user i want to be able to view/send invoice_items withholding some attributes
--
+- in order to keep the records safely and to ease further processing as a user i want to be able to export my whole dataset as json
+- in order to migrate from other systems as a user i want to be able to import my whole dataset from json
+

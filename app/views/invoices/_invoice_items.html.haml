@@ -5,6 +5,7 @@
       %th.started_at= t('invoicer.started_at')
       %th.ended_at= t('invoicer.ended_at')
       %th.pauses= t('invoicer.pauses')
+      %th.pauses= t('invoicer.hours')
       %th.pricing_strategy= t('invoicer.pricing_strategy')
       %th.vat_rate= t('invoicer.vat_rate')
       %th.vat_rate= t('invoicer.price')
@@ -16,7 +17,8 @@
         %td= l(invoice_item.started_at, :format => :numeric)
         %td= l(invoice_item.ended_at, :format => :numeric)
         %td= invoice_item.pause_times
-        %td= t(invoice_item.pricing_strategy)
+        %td= invoice_item.hours.round(1)
+        %td= t("invoicer.pricing_strategies.#{invoice_item.pricing_strategy}")
         %td= invoice_item.vat_rate
         %td= number_to_currency(invoice_item.price)
         %td= invoice_item.amount

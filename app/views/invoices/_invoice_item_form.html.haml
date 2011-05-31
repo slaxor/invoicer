@@ -2,7 +2,7 @@
   %h3= t('invoicer.invoice_items')
   - @invoice.invoice_items.each do |invoice_item|
     .invoice_item
-      = simple_fields_for invoice_item do |ii|
+      = f.simple_fields_for invoice_item, :name => [:invoice_item, invoice_item.id] do |ii|
         = ii.input :description, :label => t('invoicer.description')
         = ii.input :started_at, :label => t('invoicer.started_at'), :input_html => {:type => :datetime}
         = ii.input :ended_at, :label => t('invoicer.ended_at'), :input_html => {:type => :datetime}
@@ -10,7 +10,7 @@
           %h4= t('invoicer.pauses')
           - invoice_item.pauses.each do |pause|
             .pause
-              = simple_form_for pause do |p|
+              = ii.simple_fields_for pause do |p|
                 = p.input :description, :label => t('invoicer.description')
                 = p.input :started_at, :label => t('invoicer.started_at'), :input_html => {:type => :datetime}
                 = p.input :ended_at, :label => t('invoicer.ended_at'), :input_html => {:type => :datetime}

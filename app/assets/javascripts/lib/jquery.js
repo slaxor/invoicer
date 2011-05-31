@@ -11,7 +11,7 @@
  * Copyright 2011, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Thu May 26 16:51:41 2011 -0400
+ * Date: Mon May 16 10:38:36 2011 -0400
  */
 (function( window, undefined ) {
 
@@ -64,14 +64,6 @@ var jQuery = function( selector, context ) {
 	ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,
 	rmsie = /(msie) ([\w.]+)/,
 	rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
-
-	// Matches dashed string for camelizing
-	rdashAlpha = /-([a-z])/ig,
-
-	// Used by jQuery.camelCase as callback to replace()
-	fcamelCase = function( all, letter ) {
-		return letter.toUpperCase();
-	},
 
 	// Keep a UserAgent string for use with jQuery.browser
 	userAgent = navigator.userAgent,
@@ -609,12 +601,6 @@ jQuery.extend({
 				window[ "eval" ].call( window, data );
 			} )( data );
 		}
-	},
-
-	// Converts a dashed string to camelCased string;
-	// Used by both the css and data modules
-	camelCase: function( string ) {
-		return string.replace( rdashAlpha, fcamelCase );
 	},
 
 	nodeName: function( elem, name ) {
@@ -1257,10 +1243,11 @@ jQuery.support = (function() {
 	}
 
 	if ( !div.addEventListener && div.attachEvent && div.fireEvent ) {
-		div.attachEvent( "onclick", function() {
+		div.attachEvent( "onclick", function click() {
 			// Cloning a node shouldn't copy over any
 			// bound event handlers (IE does this)
 			support.noCloneEvent = false;
+			div.detachEvent( "onclick", click );
 		});
 		div.cloneNode( true ).fireEvent( "onclick" );
 	}
@@ -1294,7 +1281,9 @@ jQuery.support = (function() {
 		width: 0,
 		height: 0,
 		border: 0,
-		margin: 0
+		margin: 0,
+		// Set background to avoid IE crashes when removing (#9028)
+		background: "none"
 	};
 	if ( body ) {
 		jQuery.extend( testElementStyle, {
@@ -1391,9 +1380,6 @@ jQuery.support = (function() {
 			support[ i + "Bubbles" ] = isSupported;
 		}
 	}
-
-	// Null connected elements to avoid leaks in IE
-	marginDiv = div = input = null;
 
 	return support;
 })();
@@ -2066,13 +2052,7 @@ jQuery.fn.extend({
 					return ret;
 				}
 
-				ret = elem.value;
-
-				return typeof ret === "string" ? 
-					// handle most common string cases
-					ret.replace(rreturn, "") : 
-					// handle cases where value is null/undef or number
-					ret == null ? "" : ret;
+				return (elem.value || "").replace(rreturn, "");
 			}
 
 			return undefined;
@@ -2250,8 +2230,8 @@ jQuery.extend({
 				return value;
 			}
 
-		} else if ( hooks && "get" in hooks && notxml && (ret = hooks.get( elem, name )) !== null ) {
-			return ret;
+		} else if ( hooks && "get" in hooks && notxml ) {
+			return hooks.get( elem, name );
 
 		} else {
 
@@ -2314,25 +2294,6 @@ jQuery.extend({
 					rfocusable.test( elem.nodeName ) || rclickable.test( elem.nodeName ) && elem.href ?
 						0 :
 						undefined;
-			}
-		},
-		// Use the value property for back compat
-		// Use the formHook for button elements in IE6/7 (#1954)
-		value: {
-			get: function( elem, name ) {
-				if ( formHook && jQuery.nodeName( elem, "button" ) ) {
-					return formHook.get( elem, name );
-				}
-				return name in elem ?
-					elem.value :
-					null;
-			},
-			set: function( elem, value, name ) {
-				if ( formHook && jQuery.nodeName( elem, "button" ) ) {
-					return formHook.set( elem, value, name );
-				}
-				// Does not return so that setAttribute is also used
-				elem.value = value;
 			}
 		}
 	},
@@ -2417,6 +2378,24 @@ boolHook = {
 	}
 };
 
+// Use the value property for back compat
+// Use the formHook for button elements in IE6/7 (#1954)
+jQuery.attrHooks.value = {
+	get: function( elem, name ) {
+		if ( formHook && jQuery.nodeName( elem, "button" ) ) {
+			return formHook.get( elem, name );
+		}
+		return elem.value;
+	},
+	set: function( elem, value, name ) {
+		if ( formHook && jQuery.nodeName( elem, "button" ) ) {
+			return formHook.set( elem, value, name );
+		}
+		// Does not return so that setAttribute is also used
+		elem.value = value;
+	}
+};
+
 // IE6/7 do not support getting/setting some attributes with get/setAttribute
 if ( !jQuery.support.getSetAttribute ) {
 
@@ -2424,7 +2403,7 @@ if ( !jQuery.support.getSetAttribute ) {
 	jQuery.attrFix = jQuery.propFix;
 	
 	// Use this for any attribute on a form in IE6/7
-	formHook = jQuery.attrHooks.name = jQuery.attrHooks.title = jQuery.valHooks.button = {
+	formHook = jQuery.attrHooks.name = jQuery.valHooks.button = {
 		get: function( elem, name ) {
 			var ret;
 			ret = elem.getAttributeNode( name );
@@ -6019,7 +5998,7 @@ function fixDefaultChecked( elem ) {
 function findInputs( elem ) {
 	if ( jQuery.nodeName( elem, "input" ) ) {
 		fixDefaultChecked( elem );
-	} else if ( "getElementsByTagName" in elem ) {
+	} else if ( elem.getElementsByTagName ) {
 		jQuery.grep( elem.getElementsByTagName("input"), fixDefaultChecked );
 	}
 }
@@ -6067,8 +6046,6 @@ jQuery.extend({
 				}
 			}
 		}
-
-		srcElements = destElements = null;
 
 		// Return the cloned set
 		return clone;
@@ -6252,6 +6229,7 @@ function evalScript( i, elem ) {
 
 var ralpha = /alpha\([^)]*\)/i,
 	ropacity = /opacity=([^)]*)/,
+	rdashAlpha = /-([a-z])/ig,
 	// fixed for IE9, see #8346
 	rupper = /([A-Z]|^ms)/g,
 	rnumpx = /^-?\d+(?:px)?$/i,
@@ -6265,7 +6243,11 @@ var ralpha = /alpha\([^)]*\)/i,
 	curCSS,
 
 	getComputedStyle,
-	currentStyle;
+	currentStyle,
+
+	fcamelCase = function( all, letter ) {
+		return letter.toUpperCase();
+	};
 
 jQuery.fn.css = function( name, value ) {
 	// Setting 'undefined' is a no-op
@@ -6409,6 +6391,10 @@ jQuery.extend({
 		for ( name in options ) {
 			elem.style[ name ] = old[ name ];
 		}
+	},
+
+	camelCase: function( string ) {
+		return string.replace( rdashAlpha, fcamelCase );
 	}
 });
 
@@ -6446,6 +6432,7 @@ jQuery.each(["height", "width"], function( i, name ) {
 
 				if ( val < 0 || val == null ) {
 					val = elem.style[ name ];
+
 					// Should return "auto" instead of 0, use 0 for
 					// temporary backwards-compat
 					return val === "" || val === "auto" ? "0px" : val;
@@ -8556,8 +8543,7 @@ function defaultDisplay( nodeName ) {
 
 	if ( !elemdisplay[ nodeName ] ) {
 
-		var body = document.body,
-			elem = jQuery( "<" + nodeName + ">" ).appendTo( body ),
+		var elem = jQuery( "<" + nodeName + ">" ).appendTo( "body" ),
 			display = elem.css( "display" );
 
 		elem.remove();
@@ -8571,15 +8557,14 @@ function defaultDisplay( nodeName ) {
 				iframe.frameBorder = iframe.width = iframe.height = 0;
 			}
 
-			body.appendChild( iframe );
+			document.body.appendChild( iframe );
 
 			// Create a cacheable copy of the iframe document on first call.
-			// IE and Opera will allow us to reuse the iframeDoc without re-writing the fake HTML
-			// document to it; WebKit & Firefox won't allow reusing the iframe document.
+			// IE and Opera will allow us to reuse the iframeDoc without re-writing the fake html
+			// document to it, Webkit & Firefox won't allow reusing the iframe document
 			if ( !iframeDoc || !iframe.createElement ) {
 				iframeDoc = ( iframe.contentWindow || iframe.contentDocument ).document;
-				iframeDoc.write( ( document.compatMode === "CSS1Compat" ? "<!doctype html>" : "" ) + "<html><body>" );
-				iframeDoc.close();
+				iframeDoc.write( "<!doctype><html><body></body></html>" );
 			}
 
 			elem = iframeDoc.createElement( nodeName );
@@ -8588,7 +8573,7 @@ function defaultDisplay( nodeName ) {
 
 			display = jQuery.css( elem, "display" );
 
-			body.removeChild( iframe );
+			document.body.removeChild( iframe );
 		}
 
 		// Store the correct default display
@@ -8916,17 +8901,15 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 
 	// innerHeight and innerWidth
 	jQuery.fn["inner" + name] = function() {
-		var elem = this[0];
-		return elem && elem.style ?
-			parseFloat( jQuery.css( elem, type, "padding" ) ) :
+		return this[0] ?
+			parseFloat( jQuery.css( this[0], type, "padding" ) ) :
 			null;
 	};
 
 	// outerHeight and outerWidth
 	jQuery.fn["outer" + name] = function( margin ) {
-		var elem = this[0];
-		return elem && elem.style ?
-			parseFloat( jQuery.css( elem, type, margin ? "margin" : "border" ) ) :
+		return this[0] ?
+			parseFloat( jQuery.css( this[0], type, margin ? "margin" : "border" ) ) :
 			null;
 	};
 

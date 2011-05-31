@@ -1,8 +1,10 @@
-#pdf.page.size = 'A4'
-#pdf.font "#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf"
-#pdf.font "/usr/share/fonts/truetype/msttcorefonts/georgia.ttf"
-#pdf.font "Times-Roman"
-pdf.font "Helvetica"
+#units are 72/inch -> 8.27 * 72 = 595.44 (width) 11.69 * 72 = 841.68 (height)
+pdf.font_families.update( 'gentium' => {:normal => "#{Rails.root}/public/fonts/ttf-sil-gentium-basic/GenBasR.ttf",
+    :bold =>  "#{Rails.root}/public/fonts/ttf-sil-gentium-basic/GenBasB.ttf",
+    :italic =>  "#{Rails.root}/public/fonts/ttf-sil-gentium-basic/GenBasI.ttf"})
+pdf.font "gentium"
+#alder kostet das rechenzeit :(
+#pdf.image(@invoice.invoicing_party.logo, :position => :right,  :vposition => :top, :width => 100, :height => 100)
 sender_address = [@invoice.invoicing_party.name, @invoice.invoicing_party.street, "#{@invoice.invoicing_party.post_code} #{@invoice.invoicing_party.city}"]
 print_date = l(@invoice.printed_at.to_date)
 
@@ -25,20 +27,21 @@ pdf.text_box("#{@invoice.invoicing_party.city}, #{print_date}",
 pdf.bounding_box [pdf.margin_box.left, pdf.cursor - 100], :width => pdf.margin_box.width do
   pdf.text t('invoicer.pdf.invoice'), :style => :bold, :size => 24
   pdf.text t('invoicer.pdf.invoice_number', {:number => @invoice.number}), :size => 14
+  pdf.text t('invoicer.pdf.purchase_order', {:purchase_order => @invoice.purchase_order}) unless @invoice.purchase_order.blank?
 end
 
 pdf.bounding_box([pdf.margin_box.left, pdf.cursor - 50], :width => pdf.margin_box.width) do
-  pdf.text t('invoicer.pdf.purchase_order', {:purchase_order => @invoice.purchase_order}) if @invoice.purchase_order
-  pdf.text @invoice.covering_text
+  pdf.text @invoice.covering_text, :inline_format => true
 end
 pdf.bounding_box [pdf.margin_box.left + 20, pdf.cursor - 30], :width => pdf.margin_box.width do
   pdf.table([
-    [t('invoicer.pdf.hours_as_stated_in_service_statement', :hours => number_with_delimiter(@invoice.hours)),
+    [t('invoicer.pdf.hours_as_stated_in_service_statement', :hours => number_with_delimiter(@invoice.hours.round(1))),
        number_to_currency(@invoice.amount, :unit => @invoice.currency)],
     [t('invoicer.pdf.vat_to_be_added'),
       number_to_currency(@invoice.vat_amount, :unit => @invoice.currency)],
     [t('invoicer.pdf.total_amount'), number_to_currency(@invoice.gross_amount, :unit => @invoice.currency)]
-  ], :cell_style => {:borders => []}) do
+  ], :cell_style => {:borders => []}, :width => 350) do
+    row(-1).borders = [:top]
     row(-1).style(:font_style => :bold)
     column(1).align = :right
   end
@@ -97,17 +100,27 @@ invoice_items = @invoice.invoice_items.map do |invoice_item|
     l(invoice_item.started_at, :format => :numeric),
     l(invoice_item.ended_at, :format => :numeric),
     invoice_item.pause_times,
-    number_with_delimiter(invoice_item.hours),
+    number_with_delimiter(invoice_item.hours.round(1)),
     invoice_item.description,
     number_to_currency(invoice_item.amount, :unit => @invoice.currency),
-    number_with_delimiter(invoice_item.vat_rate * 100),
+    number_to_percentage(invoice_item.vat_rate * 100),
     number_to_currency(invoice_item.vat_amount, :unit => @invoice.currency),
     number_to_currency(invoice_item.gross_amount, :unit => @invoice.currency)
   ]
 end
 pdf.move_down 60
 pdf.table(
-  [['Anfang', 'Ende', 'Pausen', 'Stunden', 'Beschreibung', 'Betrag', 'Mwst.-Satz', 'Mwst.', 'Brutto']] + invoice_items,
+  [[
+      t('invoicer.pdf.started_at'),
+      t('invoicer.pdf.ended_at'),
+      t('invoicer.pdf.pauses'),
+      t('invoicer.pdf.hours'),
+      t('invoicer.pdf.description'),
+      t('invoicer.pdf.amount'),
+      t('invoicer.pdf.vat_rate'),
+      t('invoicer.pdf.vat_amount'),
+      t('invoicer.pdf.gross_amount')
+  ]] + invoice_items,
   :cell_style => {:size => 6},
   :header => true,
   :row_colors => ["c0ffc0", "ffffff"]

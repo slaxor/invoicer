@@ -1,4 +1,9 @@
 // font-face fonts
 // see http://compass-style.org/docs/reference/compass/css3/font_face/
 
-//@import "compass/css3/font-face"
+@import "compass/css3/font-face";
+@include font-face("GentiumBasic", font-files("/fonts/ttf-sil-gentium-basic/GenBasR.ttf", truetype));
+@include font-face("GentiumBasic_Bold", font-files("/fonts/ttf-sil-gentium-basic/GenBasB.ttf", truetype));
+@include font-face("GentiumBasic_Italic", font-files("/fonts/ttf-sil-gentium-basic/GenBasI.ttf", truetype));
+@include font-face("GentiumBasic_Bold_Italic", font-files("/fonts/ttf-sil-gentium-basic/GenBasBI.ttf", truetype));
+

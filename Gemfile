@@ -20,10 +20,11 @@ gem 'rails3-generators'
 gem 'prawn'
 gem 'prawnto'
 gem 'json'
-gem "compass"
 gem 'sass'
+gem "compass"
 gem "html5-boilerplate"
 gem "simple_form"
+gem 'rmagick'
 
 group :test, :development do
   gem 'rspec'
