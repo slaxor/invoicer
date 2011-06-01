@@ -13,7 +13,7 @@ Invoicer::Application.routes.draw do
   resources :users
   resources :invoices do
     member do
-      put :handle_workflow_event
+      put 'handle_workflow_event/:event', :action => :handle_workflow_event
       resource :invoice_items do
         member do
           resource :pauses

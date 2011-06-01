@@ -8,7 +8,7 @@ gem 'jquery-rails'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'devise' # users and auth
-gem 'carrierwave' # file handling
+gem 'carrierwave' #'=0.5.3' # file handling
 gem 'workflow_on_mongoid' #fsm
 gem 'unicorn'
 gem 'capistrano'
