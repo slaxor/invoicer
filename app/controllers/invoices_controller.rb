@@ -2,10 +2,6 @@
 class InvoicesController < ApplicationController
   def index
     @invoices = current_user.invoices
-    respond_to do |format|
-      format.html
-      format.json  { render :json => @invoices }
-    end
   end
 
   def show
@@ -26,15 +22,10 @@ class InvoicesController < ApplicationController
         )
       end
     end
-    @invoice = Invoice.find(params[:id])
   end
 
   def new
     @invoice = Invoice.new
-    respond_to do |format|
-      format.html
-      format.json  { render :json => @invoice }
-    end
   end
 
   def edit
@@ -44,30 +35,11 @@ class InvoicesController < ApplicationController
   end
 
   def create
-    @invoice = Invoice.new(params[:invoice])
-
-    respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to(@invoice, :notice => 'Invoice was successfully created.') }
-        format.json  { render :json => @invoice, :status => :created, :location => @invoice }
-      else
-        format.html { render :action => "new" }
-        format.json  { render :json => @invoice.errors, :status => :unprocessable_entity }
-      end
-    end
+    Invoice.create(params[:invoice])
   end
 
   def update
     @invoice = Invoice.find(params[:id])
-    respond_to do |format|
-      if @invoice.update_attributes(params[:invoice])
-        format.html { redirect_to(@invoice, :notice => 'Invoice was successfully updated.') }
-        format.json  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json  { render :json => @invoice.errors, :status => :unprocessable_entity }
-      end
-    end
   end
 
   def handle_workflow_event
@@ -80,12 +52,6 @@ class InvoicesController < ApplicationController
   end
 
   def destroy
-    @invoice = Invoice.find(params[:id])
-    @invoice.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(invoices_url) }
-      format.json  { head :ok }
-    end
+    Invoice.find(params[:id]).destroy
   end
 end
