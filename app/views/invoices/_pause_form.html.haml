@@ -1,0 +1,9 @@
+.pauses
+  %h4= t('invoicer.pauses')
+  .pause
+    = ii.simple_fields_for :pauses do |p|
+      = p.input :description, :label => t('invoicer.description')
+      = p.input :started_at, :label => t('invoicer.started_at'), :input_html => {:type => :datetime}
+      = p.input :ended_at, :label => t('invoicer.ended_at'), :input_html => {:type => :datetime}
+
+
