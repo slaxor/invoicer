@@ -34,6 +34,7 @@ pdf.bounding_box([pdf.margin_box.left, pdf.cursor - 50], :width => pdf.margin_bo
   pdf.text @invoice.covering_text, :inline_format => true
 end
 pdf.bounding_box [pdf.margin_box.left + 20, pdf.cursor - 30], :width => pdf.margin_box.width do
+debugger
   pdf.table([
     [t('invoicer.pdf.hours_as_stated_in_service_statement', :hours => number_with_delimiter(@invoice.hours.round(1))),
        number_to_currency(@invoice.amount, :unit => @invoice.currency)],

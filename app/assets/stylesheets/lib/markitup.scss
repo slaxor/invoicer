@@ -1,0 +1,27 @@
+.markItUp {
+  ul {
+    list-style: none
+  }
+
+  li.markItUpButton {
+    display: inline-table;
+    color: transparent;
+    width: 10px;
+    overflow: hidden;
+  }
+  .markItUpButton1 a {
+    background-image:url(lib/markitup/bold.png);
+  }
+
+  .markItUpButton2 a {
+    background-image:url(lib/markitup/italic.png);
+  }
+
+  .clean a {
+    background-image:url(lib/markitup/clean.png);
+  }
+
+  .preview a {
+    background-image:url(lib/markitup/preview.png);
+  }
+}

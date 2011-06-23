@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '>=3.1.0.rc1'
+gem 'rails', '~>3.1.0.rc4'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
@@ -25,6 +25,7 @@ gem "compass"
 gem "html5-boilerplate"
 gem "simple_form"
 gem 'rmagick'
+gem 'rabl' #for json api
 
 group :test, :development do
   gem 'rspec'

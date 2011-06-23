@@ -2,9 +2,9 @@
 class Invoice
   include Mongoid::Document
   include Mongoid::Paranoia
-  include Mongoid::Versioning
+  #include Mongoid::Versioning
 
-  max_versions 15
+  #max_versions 15
 
   referenced_in :customer
   referenced_in :invoicing_party
@@ -23,6 +23,8 @@ class Invoice
     :invoice_items, :history
 
   default_scope desc(:due_on, :number)
+
+  accepts_nested_attributes_for :invoice_items, :allow_destroy => true
 
   validates_uniqueness_of :number, :scope => :invoicing_party_id
   validates_presence_of :invoicing_party

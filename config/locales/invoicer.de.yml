@@ -47,9 +47,9 @@ de:
         received_partial_payment: 'teilweise bezahlt'
         received_payment: 'bezahlt'
         due_date_exceeded: 'Zahlungsziel überschritten'
+        cancel: 'brich ab'
       states:
         applied_for_court_order: 'Mahnbescheid beantragt'
-        cancel: 'brich ab'
         cancelled: 'abgebrochen'
         completed: 'fertiggestellt'
         enforcable: 'durchsetzbar'
@@ -82,6 +82,7 @@ de:
     triggering_event: 'auslösendes Ereignis'
     when: 'wann'
     paid: 'Bezahlt'
+    price: 'Preis'
     hours: 'Stunden'
     amount: 'Betrag'
     vat_amount: 'Mwst-Betrag'

@@ -42,7 +42,7 @@ module Invoicer
     config.assets.enabled = true
     #config.serve_static_assets = false
     config.assets.js_compressor  = :uglifier
-    config.assets.css_compressor = :scss
+    #config.assets.css_compressor = :scss
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     config.mongoid.logger = Logger.new($stdout, :info) if Rails.env.development?

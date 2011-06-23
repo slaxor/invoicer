@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+//=require 'lib/markitup/jquery.markitup.js'
+pdfSettings = {
+  markupSet: [
+    {name:'bold', key:'b', openWith:'<b>', closeWith:'</b>'},
+    {name:'italic', key:'i', openWith:'<i>', closeWith:'</i>'}
+  ]
+}
+$('textarea').markItUp(pdfSettings)
+

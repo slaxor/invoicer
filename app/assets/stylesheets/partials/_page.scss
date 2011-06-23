@@ -1,9 +1,10 @@
 @import "compass/css3";
+@import "blueprint";
+@import "blueprint/grid";
+@import "blueprint/buttons";
 
-//-----------------------------------------------
-// The following html5-boilerplate styles should
-// probably be customized for each site
-//-----------------------------------------------
+$invoice_items_color: rgba(243, 243, 255, 0.9);
+$pauses_color: rgba(243, 255, 243, 0.9);
 
 body, select, input, textarea {
   color: $font-color;
@@ -35,7 +36,7 @@ small {
 // inputs if you want to use these
 input:valid, textarea:valid {}
 input:invalid, textarea:invalid {
-  @include border-radius(1px);
+  @include border-radius(6px);
   @include single-box-shadow(red, 0, 0, 5px, 0);
 }
 .no-boxshadow input:invalid,
@@ -57,13 +58,6 @@ header {}
 footer {}
 
 
-
-@import "blueprint";
-@import "blueprint/grid";
-@import "blueprint/buttons";
-
-$invoice_items_color: rgba(243, 243, 255, 0.9);
-$pauses_color: rgba(243, 255, 243, 0.9);
 
 body {
   @include background-image(linear-gradient(left top, #efefff, #efefdd));
@@ -130,9 +124,7 @@ input {
   display: inline-table;
   padding: 0 15px;
   //background-image: -moz-radial-gradient(center 45deg, circle closest-side, orange 0%, red 100%)
-  border-radius: 10px 10px 10px 10px;
-  -moz-border-radius: 10px 10px 10px 10px;
-  -webkit-border-radius: 10px 10px 10px 10px;
+  @include border-radius(10px);
   background: none repeat scroll 0 0 rgba(255, 255, 255, 0.9); }
 
 #flashmsg {
@@ -142,9 +134,7 @@ input {
   top: 4em;
   z-index: 10000;
   border: 0px;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+  @include border-radius(6px);
   text-align: center;
   padding: 4px; }
 
@@ -276,5 +266,11 @@ th {
     display: block;
     font-style: italic;
   }
+}
+
+.avatar {
+  border-radius: 15px;
+  width: 100px;
+  height: 100px;
 }
 

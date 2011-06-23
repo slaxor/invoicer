@@ -1,21 +1,13 @@
 .invoice_items
   %h3= t('invoicer.invoice_items')
-  - @invoice.invoice_items.each do |invoice_item|
-    .invoice_item
-      = f.simple_fields_for invoice_item, :name => [:invoice_item, invoice_item.id] do |ii|
-        = ii.input :description, :label => t('invoicer.description')
-        = ii.input :started_at, :label => t('invoicer.started_at'), :input_html => {:type => :datetime}
-        = ii.input :ended_at, :label => t('invoicer.ended_at'), :input_html => {:type => :datetime}
-        .pauses
-          %h4= t('invoicer.pauses')
-          - invoice_item.pauses.each do |pause|
-            .pause
-              = ii.simple_fields_for pause do |p|
-                = p.input :description, :label => t('invoicer.description')
-                = p.input :started_at, :label => t('invoicer.started_at'), :input_html => {:type => :datetime}
-                = p.input :ended_at, :label => t('invoicer.ended_at'), :input_html => {:type => :datetime}
-        = ii.input :pricing_strategy, :label => t('invoicer.pricing_strategy')
-        = ii.input :vat_rate, :label => t('invoicer.vat_rate')
-        = ii.input :price, :label => t('invoicer.price')
+  .invoice_item
+    = f.simple_fields_for :invoice_items do |ii|
+      = ii.input :description, :label => t('invoicer.description')
+      = ii.input :started_at, :label => t('invoicer.started_at'), :input_html => {:type => :datetime}
+      = ii.input :ended_at, :label => t('invoicer.ended_at'), :input_html => {:type => :datetime}
+      = render :partial => 'pause_form', :locals => {:ii => ii}
+      = ii.input :pricing_strategy, :label => t('invoicer.pricing_strategy')
+      = ii.input :vat_rate, :label => t('invoicer.vat_rate')
+      = ii.input :price, :label => t('invoicer.price')
 
 
