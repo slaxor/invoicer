@@ -2,4 +2,5 @@
  *= require 'lib/jquery-ui'
  *= require 'lib/markitup'
  *= require 'style'
+ *= require 'invoicer'
 */

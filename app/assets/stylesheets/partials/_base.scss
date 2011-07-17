@@ -10,6 +10,12 @@ $link-visited-color: #607890;
 $selected-font-color: #fff;  // color for selected text
 $selected-background-color: #ff5E99;  // bg-color for selected text
 $list-left-margin: 2em;  // left margin for ul an ol
-$blueprint-grid-columns: 12;
 $blueprint-font-family: "GentiumBasic";
+$blueprint-grid-columns: 24;
+$blueprint-container-size: 950px;
+$blueprint-grid-margin: 10px;
+
+// Use this to calculate the width based on the total width.
+// Or you can set $blueprint-grid-width to a fixed value and unset $blueprint-container-size -- it will be calculated for you.
+$blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 

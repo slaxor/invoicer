@@ -1,10 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~>3.1.0.rc4'
+gem 'haml'
+gem 'sass'
+gem 'sass-rails'
+gem 'rails', '>=3.1.0.rc4'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
-
+gem 'sprockets', '= 2.0.0.beta.10'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'devise' # users and auth
@@ -14,14 +17,11 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'capistrano-ext'
 gem 'ruby-debug19', :require => 'ruby-debug'
-gem 'haml'
-gem 'sass'
 gem 'rails3-generators'
 gem 'prawn'
 gem 'prawnto'
 gem 'json'
-gem 'sass'
-gem "compass"
+gem "compass", :git => 'git://github.com/chriseppstein/compass.git',  :branch => 'rails31'
 gem "html5-boilerplate"
 gem "simple_form"
 gem 'rmagick'

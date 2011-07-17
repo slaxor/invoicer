@@ -1,12 +1,13 @@
 require File.expand_path('../boot', __FILE__)
-
+require 'sass'
 # Pick the frameworks you want:
 # require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 require "rails/test_unit/railtie"
-
+require 'yaml'
+YAML::ENGINE.yamler= 'syck'
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
@@ -39,14 +40,19 @@ module Invoicer
     config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.assets.enabled = true
-    #config.serve_static_assets = false
-    config.assets.js_compressor  = :uglifier
-    #config.assets.css_compressor = :scss
+    # config.action_view.javascript_expansions[:defaults] = %w(prototype prototype_ujs)
+
+    # Configure the default encoding used in templates for Ruby 1.9.
+    config.encoding = "utf-8"
+
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     config.mongoid.logger = Logger.new($stdout, :info) if Rails.env.development?
+    # Enable the asset pipeline
+    config.assets.enabled = true
+    #config.assets.append_path  Rails.root.join('app', 'assets').to_s
   end
 end
+#Rails.application.assets.append_path  Rails.root.join('app', 'assets').to_s
 
 

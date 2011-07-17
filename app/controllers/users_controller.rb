@@ -18,6 +18,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def import
+
+  end
+
+  def export
+
+  end
+
   #ma sehn ob ich suiziduser will
   #def destroy
     #@user = User.find(params[:id])
